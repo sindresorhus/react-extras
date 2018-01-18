@@ -40,7 +40,7 @@ If you need it to not be evaluated on `false`, you can pass a function to the `r
 <div>
 	<If condition={props.error} render={() => (
 		<h1>{props.error}</h1>
-	)}>
+	)}/>
 </div>
 ```
 
@@ -87,7 +87,7 @@ Prefer `<RootClass/>` though, because it's nicer to put global classes on `<html
 With `<BodyClass/>` you need to do:
 
 ```css
-.dark-mode.body {
+body.dark-mode {
 	background: #000;
 }
 
