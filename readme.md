@@ -17,8 +17,10 @@ import React from 'react';
 import {If} from 'react-extras';
 
 const App = props => (
-	<If condition={props.showUnicorn} className="unicorn">
-		🦄
+	<If condition={props.showUnicorn}>
+		<div className="unicorn">
+			🦄
+		</div>
 	</If>
 );
 ```
@@ -29,6 +31,48 @@ const App = props => (
 ### `<If>`
 
 React component that renders the children if the `condition` prop is `true`.
+
+### `<RootClass/>`
+
+Renderless React component that can add and remove classes to the root `<html>` element. It accepts an `add` prop for adding classes, and a `remove` prop for removing classes. Both accept either a single class or multiple classes separated by space.
+
+```jsx
+<If condition={props.isDarkMode}>
+	<RootClass add="dark-mode"/>
+</If>
+```
+
+```jsx
+<RootClass add="logged-in paid-user" remove="promo"/>
+```
+
+### `<BodyClass/>`
+
+Same as `<RootClass/>` but for `<body>`.
+
+Prefer `<RootClass/>` though, because it's nicer to put global classes on `<html>` as you can consistently prefix everything with the class:
+
+```css
+.dark-mode body {
+	background: #000;
+}
+
+.dark-mode a {
+	…
+}
+```
+
+With `<BodyClass/>` you need to do:
+
+```css
+.dark-mode.body {
+	background: #000;
+}
+
+.dark-mode a {
+	…
+}
+```
 
 
 ## Related

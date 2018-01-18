@@ -42,7 +42,9 @@
 		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
 		"babel-preset-react": "^6.24.1",
 		"babel-preset-stage-3": "^6.24.1",
+		"browser-env": "^3.2.4",
 		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
 		"react-test-renderer": "^16.2.0",
 		"xo": "*"
 	},
@@ -50,6 +52,10 @@
 		"react": ">=16"
 	},
 	"xo": {
+		"envs": [
+			"node",
+			"browser"
+		],
 		"parser": "babel-eslint",
 		"rules": {
 			"import/no-unresolved": "off",
