@@ -1,0 +1,63 @@
+{
+	"name": "react-extras",
+	"version": "0.0.0",
+	"description": "Useful components and utilities for working with React",
+	"license": "MIT",
+	"repository": "sindresorhus/react-extras",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"main": "./dist/index.js",
+	"engines": {
+		"node": ">=6"
+	},
+	"scripts": {
+		"build": "babel index.js --out-dir=dist",
+		"test": "xo && ava",
+		"prepublishOnly": "npm run build"
+	},
+	"files": [
+		"dist"
+	],
+	"keywords": [
+		"react",
+		"extras",
+		"component",
+		"components",
+		"util",
+		"utils",
+		"utilities",
+		"helper",
+		"helpers"
+	],
+	"devDependencies": {
+		"ava": "*",
+		"babel-cli": "^6.26.0",
+		"babel-eslint": "^8.0.3",
+		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+		"babel-preset-react": "^6.24.1",
+		"babel-preset-stage-3": "^6.24.1",
+		"xo": "*"
+	},
+	"peerDependencies": {
+		"react": ">=16"
+	},
+	"xo": {
+		"parser": "babel-eslint",
+		"rules": {
+			"import/no-unresolved": "off",
+			"import/prefer-default-export": "off"
+		}
+	},
+	"babel": {
+		"plugins": [
+			"transform-es2015-modules-commonjs"
+		],
+		"presets": [
+			"react",
+			"stage-3"
+		]
+	}
+}
