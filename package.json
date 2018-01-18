@@ -32,6 +32,9 @@
 		"helper",
 		"helpers"
 	],
+	"dependencies": {
+		"prop-types": "^15.6.0"
+	},
 	"devDependencies": {
 		"ava": "*",
 		"babel-cli": "^6.26.0",
@@ -39,6 +42,8 @@
 		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
 		"babel-preset-react": "^6.24.1",
 		"babel-preset-stage-3": "^6.24.1",
+		"react": "^16.2.0",
+		"react-test-renderer": "^16.2.0",
 		"xo": "*"
 	},
 	"peerDependencies": {
@@ -50,6 +55,12 @@
 			"import/no-unresolved": "off",
 			"import/prefer-default-export": "off"
 		}
+	},
+	"ava": {
+		"require": [
+			"babel-register"
+		],
+		"babel": "inherit"
 	},
 	"babel": {
 		"plugins": [

@@ -28,7 +28,7 @@ const App = props => (
 
 ### `<If>`
 
-React component that renders the children a `<div>` if the `condition` prop is truthy. Additional props are passed to the `<div>`.
+React component that renders the children if the `condition` prop is `true`.
 
 
 ## Related
