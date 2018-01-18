@@ -32,6 +32,28 @@ const App = props => (
 
 React component that renders the children if the `condition` prop is `true`.
 
+Beware that even though the children are not rendered when the `condition` is `false`, they're still evaluated.
+
+If you need it to not be evaluated on `false`, you can pass a function to the `render` prop that returns the children:
+
+```jsx
+<div>
+	<If condition={props.error} render={() => (
+		<h1>{props.error}</h1>
+	)}>
+</div>
+```
+
+Or you could just use plain JavaScript:
+
+```jsx
+<div>
+	{props.error && (
+		<h1>{props.error}</h1>
+	)}
+</div>
+```
+
 ### `<RootClass/>`
 
 Renderless React component that can add and remove classes to the root `<html>` element. It accepts an `add` prop for adding classes, and a `remove` prop for removing classes. Both accept either a single class or multiple classes separated by space.

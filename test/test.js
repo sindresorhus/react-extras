@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars, no-return-assign */
 import {serial as test} from 'ava';
 import React from 'react';
 import {renderIntoDocument} from 'react-dom/test-utils';
@@ -13,6 +13,12 @@ const snapshotJSX = (t, jsx) => t.snapshot(render.create(jsx).toJSON());
 test('<If>', t => {
 	snapshotJSX(t, <If condition={true}><button>🦄</button></If>);
 	snapshotJSX(t, <If condition={false}><button>🦄</button></If>);
+
+	let evaluated = false;
+	snapshotJSX(t, <If condition={false} render={() => (
+		<button>{evaluated = true}</button>
+	)}/>);
+	t.false(evaluated);
 });
 
 test('<RootClass/>', t => {
