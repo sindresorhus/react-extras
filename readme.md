@@ -28,6 +28,10 @@ const App = props => (
 
 ## API
 
+### autoBind(self, [options])
+
+Automatically binds your `React.Component` subclass methods to the instance. See the [`autoBind.react()` docs](https://github.com/sindresorhus/auto-bind#autobindreactself-options).
+
 ### `<If>`
 
 React component that renders the children if the `condition` prop is `true`.

@@ -30,9 +30,14 @@
 		"utils",
 		"utilities",
 		"helper",
-		"helpers"
+		"helpers",
+		"auto-bind",
+		"autobind",
+		"bind",
+		"class"
 	],
 	"dependencies": {
+		"auto-bind": "^1.2.0",
 		"prop-types": "^15.6.0"
 	},
 	"devDependencies": {
