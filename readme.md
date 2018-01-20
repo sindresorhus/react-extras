@@ -2,6 +2,8 @@
 
 > Useful components and utilities for working with [React](https://reactjs.org)
 
+*Note that this package targets modern browsers. It's up to you to transpile if you need to support older browsers.*
+
 
 ## Install
 
