@@ -4,11 +4,22 @@ import React from 'react';
 import {renderIntoDocument} from 'react-dom/test-utils';
 import render from 'react-test-renderer';
 import browserEnv from 'browser-env';
-import {If, RootClass, BodyClass} from '..';
+import {classNames, If, RootClass, BodyClass} from '..';
 
 browserEnv();
 
 const snapshotJSX = (t, jsx) => t.snapshot(render.create(jsx).toJSON());
+
+test('classNames', t => {
+	t.is(classNames('x'), 'x');
+	t.is(classNames('x', 'y'), 'x y');
+	t.is(classNames(null, 'x', undefined, NaN, 0, 4, true, 'y', false, ''), 'x y');
+	t.is(classNames('x', {
+		y: true,
+		nope: false,
+		z: 'foo'
+	}), 'x y z');
+});
 
 test('<If>', t => {
 	snapshotJSX(t, <If condition={true}><button>🦄</button></If>);

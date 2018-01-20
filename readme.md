@@ -32,6 +32,57 @@ const App = props => (
 
 Automatically binds your `React.Component` subclass methods to the instance. See the [`autoBind.react()` docs](https://github.com/sindresorhus/auto-bind#autobindreactself-options).
 
+### classNames(…input)
+
+Conditionally join CSS class names together.
+
+#### input
+
+Type: `string` `Object`
+
+Accepts a combination of strings and objects. Only object keys with truthy values are included. Anything else is ignored.
+
+```js
+classNames('unicorn', 'rainbow');
+//=> 'unicorn rainbow'
+
+classNames({awesome: true, foo: false}, 'unicorn', {rainbow: false});
+//=> 'awesome unicorn'
+
+classNames('unicorn', null, undefined, 0, 1, {foo: null});
+//=> 'unicorn'
+
+const buttonType = 'main';
+classNames({[`button-${buttonType}`]: true});
+//=> 'button-main'
+```
+
+```jsx
+const Button = props => {
+	console.log(props);
+	/*
+	{
+		type: 'success',
+		small: true
+	}
+	*/
+
+	const buttonClass = classNames(
+		'button',
+		{
+			[`button-${props.type}`]: props.type,
+			'button-block': props.block,
+			'button-small': props.small
+		}
+	);
+
+	console.log(buttonClass);
+	//=> 'button button-success button-small'
+
+	return <button className={buttonClass}>…</button>;
+};
+```
+
 ### `<If>`
 
 React component that renders the children if the `condition` prop is `true`.

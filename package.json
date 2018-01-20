@@ -34,7 +34,11 @@
 		"auto-bind",
 		"autobind",
 		"bind",
-		"class"
+		"class",
+		"css",
+		"classname",
+		"classnames",
+		"classes"
 	],
 	"dependencies": {
 		"auto-bind": "^1.2.0",
