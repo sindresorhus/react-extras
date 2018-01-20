@@ -63,3 +63,5 @@ export class BodyClass extends ElementClass {
 	}
 }
 BodyClass.propTypes = ElementClass.propTypes;
+
+export const canUseDOM = typeof window !== 'undefined' && 'document' in window && 'createElement' in window.document;

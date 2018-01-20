@@ -100,6 +100,10 @@ body.dark-mode {
 }
 ```
 
+### canUseDOM
+
+A boolean of whether you're running in a context with a [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). Can be used to check if your component is running in the browser or if it's being server-rendered.
+
 
 ## Related
 
