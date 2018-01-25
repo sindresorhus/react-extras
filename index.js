@@ -48,14 +48,16 @@ export class Choose extends React.PureComponent {
 		return when ? when : otherwise;
 	}
 }
+Choose.propTypes = {
+	children: PropTypes.node
+};
+
 Choose.When = If;
+
 Choose.Otherwise = ({render, children}) => render ? render() : children;
-Choose.Otherwise = {
+Choose.Otherwise.PropTypes = {
 	children: PropTypes.node,
 	render: PropTypes.func
-};
-Choose.propTypes = {
-	children: PropTypes.node,
 };
 
 class ElementClass extends React.PureComponent {
