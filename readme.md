@@ -111,6 +111,29 @@ Or you could just use plain JavaScript:
 </div>
 ```
 
+### `<Choose>`
+
+React component similar to a switch case, `<Choose>` has 2 children components:
+ - `<Choose.When>` that renders the children if the `condition` prop is `true`.
+ - `<Choose.Otherwise>` that renders the children if has no `<Choose.When>` with `true` prop `condition`.
+
+
+```jsx
+<div>
+	<Choose>
+		<Choose.When condition={props.success}>
+			<h1>{props.success}</h1>
+		</Choose.When>
+		<Choose.When condition={props.error}>
+			<h1>{props.error}</h1>
+		</Choose.When>
+		<Choose.Otherwise>
+			<h1>😎</h1>
+		</Choose.Otherwise>
+	</Choose>
+</div>
+```
+
 ### `<RootClass/>`
 
 Renderless React component that can add and remove classes to the root `<html>` element. It accepts an `add` prop for adding classes, and a `remove` prop for removing classes. Both accept either a single class or multiple classes separated by space.
