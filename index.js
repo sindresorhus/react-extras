@@ -32,22 +32,20 @@ If.propTypes = {
 	render: PropTypes.func
 };
 
-export class Choose extends React.PureComponent {
-	render() {
-		let when = null;
-		let otherwise = null;
+export const Choose = props => {
+	let when = null;
+	let otherwise = null;
 
-		React.Children.forEach(this.props.children, children => {
-			if (children.props.condition === undefined) {
-				otherwise = children;
-			} else if (!when && children.props.condition === true) {
-				when = children;
-			}
-		});
+	React.Children.forEach(props.children, children => {
+		if (children.props.condition === undefined) {
+			otherwise = children;
+		} else if (!when && children.props.condition === true) {
+			when = children;
+		}
+	});
 
-		return when ? when : otherwise;
-	}
-}
+	return when || otherwise;
+};
 Choose.propTypes = {
 	children: PropTypes.node
 };
