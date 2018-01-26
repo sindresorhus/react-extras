@@ -111,6 +111,28 @@ Or you could just use plain JavaScript:
 </div>
 ```
 
+### `<For>`
+
+React component that iterates over `of` prop and renders the children.
+
+```jsx
+<div>
+	<For of={['🌈', '🦄', '😎']} render={(item, index) =>
+		<button key={index}>{item}</button>}
+	/>
+</div>
+```
+
+Or you could just use plain JavaScript:
+
+```jsx
+<div>
+    {['🌈', '🦄', '😎'].map((item, index) =>
+        <button key={index}>{item}</button>
+    )}
+</div>
+```
+
 ### `<RootClass/>`
 
 Renderless React component that can add and remove classes to the root `<html>` element. It accepts an `add` prop for adding classes, and a `remove` prop for removing classes. Both accept either a single class or multiple classes separated by space.
