@@ -4,7 +4,7 @@ import React from 'react';
 import {renderIntoDocument} from 'react-dom/test-utils';
 import render from 'react-test-renderer';
 import browserEnv from 'browser-env';
-import {classNames, If, RootClass, BodyClass} from '..';
+import {classNames, If, For, RootClass, BodyClass} from '..';
 
 browserEnv();
 
@@ -30,6 +30,16 @@ test('<If>', t => {
 		<button>{evaluated = true}</button>
 	)}/>);
 	t.false(evaluated);
+});
+
+test('<For>', t => {
+	snapshotJSX(t, <For of={['😎', '🦄', '🌈']}>
+		{(item, index) => <button key={index}>{item}</button>}
+	</For>);
+
+	snapshotJSX(t, <For of={['🌈', '🦄', '😎']} render={(item, index) =>
+		<button key={index}>{item}</button>}
+	/>);
 });
 
 test('<RootClass/>', t => {

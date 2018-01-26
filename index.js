@@ -32,6 +32,13 @@ If.propTypes = {
 	render: PropTypes.func
 };
 
+export const For = ({render, children, of}) => of.map((item, index) => render ? render(item, index) : children(item, index));
+For.propTypes = {
+	of: PropTypes.array.isRequired,
+	children: PropTypes.func,
+	render: PropTypes.func
+};
+
 class ElementClass extends React.PureComponent {
 	componentWillMount() {
 		const {add, remove} = this.props;
