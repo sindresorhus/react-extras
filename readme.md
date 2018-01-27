@@ -2,8 +2,6 @@
 
 > Useful components and utilities for working with [React](https://reactjs.org)
 
-*Note that this package targets modern browsers. It's up to you to transpile if you need to support older browsers.*
-
 
 ## Install
 
@@ -175,6 +173,14 @@ body.dark-mode {
 	…
 }
 ```
+
+### isStatelessComponent(Component)
+
+Returns a boolean of whether the given `Component` is a [functional stateless component](https://javascriptplayground.com/functional-stateless-components-react/).
+
+### getDisplayName(Component)
+
+Returns the [display name](https://reactjs.org/docs/react-component.html#displayname) of the given `Component`.
 
 ### canUseDOM
 
