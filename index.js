@@ -84,4 +84,9 @@ export class BodyClass extends ElementClass {
 }
 BodyClass.propTypes = ElementClass.propTypes;
 
+export const isStatelessComponent = Component => !(
+	typeof Component.prototype !== 'undefined' &&
+	typeof Component.prototype.render === 'function'
+);
+
 export const canUseDOM = typeof window !== 'undefined' && 'document' in window && 'createElement' in window.document;
