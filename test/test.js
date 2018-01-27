@@ -7,7 +7,7 @@ import browserEnv from 'browser-env';
 import {
 	classNames,
 	If,
-  Choose,
+  	Choose,
 	RootClass,
 	BodyClass,
 	isStatelessComponent,
