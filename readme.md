@@ -157,6 +157,10 @@ body.dark-mode {
 
 Returns a boolean of whether the given `Component` is a [functional stateless component](https://javascriptplayground.com/functional-stateless-components-react/).
 
+### getDisplayName(Component)
+
+Returns the [display name](https://reactjs.org/docs/react-component.html#displayname) of the given `Component`.
+
 ### canUseDOM
 
 A boolean of whether you're running in a context with a [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). Can be used to check if your component is running in the browser or if it's being server-rendered.

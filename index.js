@@ -89,4 +89,6 @@ export const isStatelessComponent = Component => !(
 	typeof Component.prototype.render === 'function'
 );
 
+export const getDisplayName = Component => Component.displayName || Component.name || 'Component';
+
 export const canUseDOM = typeof window !== 'undefined' && 'document' in window && 'createElement' in window.document;
