@@ -4,7 +4,15 @@ import React from 'react';
 import {renderIntoDocument} from 'react-dom/test-utils';
 import render from 'react-test-renderer';
 import browserEnv from 'browser-env';
-import {classNames, If, For, RootClass, BodyClass} from '..';
+import {
+	classNames,
+	If,
+	For,
+	RootClass,
+	BodyClass,
+	isStatelessComponent,
+	getDisplayName
+} from '../index';
 
 browserEnv();
 
@@ -68,4 +76,14 @@ test('<BodyClass/>', t => {
 	renderIntoDocument(<BodyClass remove="foo"/>);
 	t.false(el.classList.contains('foo'));
 	el.className = '';
+});
+
+test('isStatelessComponent()', t => {
+	t.false(isStatelessComponent(BodyClass));
+	t.true(isStatelessComponent(() => {}));
+});
+
+test('getDisplayName()', t => {
+	t.is(getDisplayName(BodyClass), 'BodyClass');
+	t.is(getDisplayName(() => {}), 'Component');
 });
