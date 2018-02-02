@@ -111,7 +111,7 @@ Or you could just use plain JavaScript:
 
 ### `<For/>`
 
-React component that iterates over `of` prop and renders the children.
+React component that iterates over `of` prop and renders the render prop.
 
 ```jsx
 <div>

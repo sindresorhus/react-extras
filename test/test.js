@@ -41,10 +41,6 @@ test('<If>', t => {
 });
 
 test('<For>', t => {
-	snapshotJSX(t, <For of={['😎', '🦄', '🌈']}>
-		{(item, index) => <button key={index}>{item}</button>}
-	</For>);
-
 	snapshotJSX(t, <For of={['🌈', '🦄', '😎']} render={(item, index) =>
 		<button key={index}>{item}</button>}
 	/>);

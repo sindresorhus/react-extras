@@ -32,10 +32,9 @@ If.propTypes = {
 	render: PropTypes.func
 };
 
-export const For = ({render, children, of}) => of.map((item, index) => render ? render(item, index) : children(item, index));
+export const For = ({render, of}) => of.map((item, index) => render(item, index));
 For.propTypes = {
 	of: PropTypes.array.isRequired,
-	children: PropTypes.func,
 	render: PropTypes.func
 };
 
