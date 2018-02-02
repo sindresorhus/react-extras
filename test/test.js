@@ -7,6 +7,7 @@ import browserEnv from 'browser-env';
 import {
 	classNames,
 	If,
+	Choose,
 	RootClass,
 	BodyClass,
 	isStatelessComponent,
@@ -37,6 +38,58 @@ test('<If>', t => {
 		<button>{evaluated = true}</button>
 	)}/>);
 	t.false(evaluated);
+});
+
+test('<Choose>', t => {
+	snapshotJSX(t, <Choose>
+		<Choose.When condition={true}><button>😎</button></Choose.When>
+		<Choose.When condition={false}><button>🦄</button></Choose.When>
+		<Choose.Otherwise><button>🌈</button></Choose.Otherwise>
+	</Choose>);
+
+	snapshotJSX(t, <Choose>
+		<Choose.When condition={true}><button>🦄</button></Choose.When>
+		<Choose.When condition={true}><button>😎</button></Choose.When>
+		<Choose.Otherwise><button>🌈</button></Choose.Otherwise>
+	</Choose>);
+
+	snapshotJSX(t, <Choose>
+		<Choose.When condition={false}><button>😎</button></Choose.When>
+		<Choose.When condition={true}><button>🦄</button></Choose.When>
+		<Choose.Otherwise><button>🌈</button></Choose.Otherwise>
+	</Choose>);
+
+	snapshotJSX(t, <Choose>
+		<Choose.When condition={false}><button>😎</button></Choose.When>
+		<Choose.When condition={false}><button>🦄</button></Choose.When>
+		<Choose.Otherwise><button>🌈</button></Choose.Otherwise>
+	</Choose>);
+
+	snapshotJSX(t, <Choose>
+		<Choose.Otherwise><button>🌈</button></Choose.Otherwise>
+		<Choose.When condition={false}><button>😎</button></Choose.When>
+		<Choose.When condition={true}><button>🦄</button></Choose.When>
+	</Choose>);
+
+	let evaluated = false;
+	snapshotJSX(t, <Choose>
+		<Choose.When condition={false}><button>🦄</button></Choose.When>
+		<Choose.When condition={false}><button>😎</button></Choose.When>
+		<Choose.Otherwise render={() => (
+			<button>{evaluated = true}</button>
+		)}/>
+	</Choose>);
+	t.true(evaluated);
+
+	evaluated = false;
+	snapshotJSX(t, <Choose>
+		<Choose.When condition={true} render={() => (
+			<button>{evaluated = true}</button>
+		)}/>
+		<Choose.When condition={false}><button>😎</button></Choose.When>
+		<Choose.Otherwise><button>🌈</button></Choose.Otherwise>
+	</Choose>);
+	t.true(evaluated);
 });
 
 test('<RootClass/>', t => {
