@@ -151,7 +151,7 @@ Or you could just use plain JavaScript:
 <div>
     {['🌈', '🦄', '😎'].map((item, index) =>
         <button key={index}>{item}</button>
-	)}
+    )}
 </div>
 ```
 
