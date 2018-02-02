@@ -109,7 +109,7 @@ Or you could just use plain JavaScript:
 </div>
 ```
 
-### `<For>`
+### `<For/>`
 
 React component that iterates over `of` prop and renders the children.
 
