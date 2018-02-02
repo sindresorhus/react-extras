@@ -111,10 +111,11 @@ Or you could just use plain JavaScript:
 
 ### `<Choose>`
 
-React component similar to a switch case, `<Choose>` has 2 children components:
+React component similar to a switch case. `<Choose>` has 2 children components:
  - `<Choose.When>` that renders the children if the `condition` prop is `true`.
  - `<Choose.Otherwise>` that renders the children if has no `<Choose.When>` with `true` prop `condition`.
-
+ 
+Note that even when the children are not rendered, they're still evaluated.
 
 ```jsx
 <div>
