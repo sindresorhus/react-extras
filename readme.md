@@ -135,7 +135,7 @@ Note that even when the children are not rendered, they're still evaluated.
 
 ### `<For/>`
 
-React component that iterates over `of` prop and renders the render prop.
+React component that iterates over `of` prop and renders the `render` prop.
 
 ```jsx
 <div>
