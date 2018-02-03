@@ -41,12 +41,6 @@ test('<If>', t => {
 	t.false(evaluated);
 });
 
-test('<For>', t => {
-	snapshotJSX(t, <For of={['🌈', '🦄', '😎']} render={(item, index) =>
-		<button key={index}>{item}</button>
-	}/>);
-});
-
 test('<Choose>', t => {
 	snapshotJSX(t, <Choose>
 		<Choose.When condition={true}><button>😎</button></Choose.When>
@@ -97,6 +91,12 @@ test('<Choose>', t => {
 		<Choose.Otherwise><button>🌈</button></Choose.Otherwise>
 	</Choose>);
 	t.true(evaluated);
+});
+
+test('<For>', t => {
+	snapshotJSX(t, <For of={['🌈', '🦄', '😎']} render={(item, index) =>
+		<button key={index}>{item}</button>
+	}/>);
 });
 
 test('<RootClass/>', t => {
