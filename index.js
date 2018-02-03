@@ -53,8 +53,14 @@ Choose.propTypes = {
 Choose.When = If;
 
 Choose.Otherwise = ({render, children}) => render ? render() : children;
-Choose.Otherwise.PropTypes = {
+Choose.Otherwise.propTypes = {
 	children: PropTypes.node,
+	render: PropTypes.func
+};
+
+export const For = ({render, of}) => of.map((item, index) => render(item, index));
+For.propTypes = {
+	of: PropTypes.array.isRequired,
 	render: PropTypes.func
 };
 

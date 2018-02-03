@@ -7,6 +7,7 @@ import browserEnv from 'browser-env';
 import {
 	classNames,
 	If,
+	For,
 	Choose,
 	RootClass,
 	BodyClass,
@@ -90,6 +91,12 @@ test('<Choose>', t => {
 		<Choose.Otherwise><button>🌈</button></Choose.Otherwise>
 	</Choose>);
 	t.true(evaluated);
+});
+
+test('<For>', t => {
+	snapshotJSX(t, <For of={['🌈', '🦄', '😎']} render={(item, index) =>
+		<button key={index}>{item}</button>
+	}/>);
 });
 
 test('<RootClass/>', t => {
