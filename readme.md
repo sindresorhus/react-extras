@@ -9,6 +9,10 @@
 $ npm install react-extras
 ```
 
+<a href="https://www.patreon.com/sindresorhus">
+	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
+
 
 ## Usage
 
@@ -112,9 +116,10 @@ Or you could just use plain JavaScript:
 ### `<Choose>`
 
 React component similar to a switch case. `<Choose>` has 2 children components:
- - `<Choose.When>` that renders the children if the `condition` prop is `true`.
- - `<Choose.Otherwise>` that renders the children if has no `<Choose.When>` with `true` prop `condition`.
- 
+
+- `<Choose.When>` that renders the children if the `condition` prop is `true`.
+- `<Choose.Otherwise>` that renders the children if has no `<Choose.When>` with `true` prop `condition`.
+
 Note that even when the children are not rendered, they're still evaluated.
 
 ```jsx
@@ -149,9 +154,9 @@ Or you could just use plain JavaScript:
 
 ```jsx
 <div>
-    {['🌈', '🦄', '😎'].map((item, index) =>
-        <button key={index}>{item}</button>
-    )}
+	{['🌈', '🦄', '😎'].map((item, index) =>
+		<button key={index}>{item}</button>
+	)}
 </div>
 ```
 
@@ -213,6 +218,7 @@ A boolean of whether you're running in a context with a [DOM](https://developer.
 ## Related
 
 - [react-router-util](https://github.com/sindresorhus/react-router-util) - Useful components and utilities for working with React Router
+- [sass-extras](https://github.com/sindresorhus/sass-extras) - Useful utilities for working with Sass
 
 
 ## License
