@@ -138,6 +138,22 @@ Note that even when the children are not rendered, they're still evaluated.
 </div>
 ```
 
+Or you could just use plain JavaScript:
+
+```
+<div>
+	{(() => {
+		if(props.success) {
+			return <h1>{props.success}</h1>
+		}
+		if(props.error) {
+			return <h1>{props.error}</h1>
+		}
+		return <h1>😎</h1>
+	})()}
+</div>
+```
+
 ### `<For/>`
 
 React component that iterates over the `of` prop and renders the `render` prop.
