@@ -10,6 +10,7 @@
 		"url": "sindresorhus.com"
 	},
 	"main": "./dist/index.js",
+	"typings": "./index.d.ts",
 	"engines": {
 		"node": ">=8"
 	},
