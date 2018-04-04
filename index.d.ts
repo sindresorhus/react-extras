@@ -8,9 +8,7 @@ export function getDisplayName(component: React.ComponentClass): string;
 
 export const canUseDOM: boolean;
 
-export class autoBind {
-  static react(el: React.ReactNode, options?: any): React.ReactNode;
-}
+export function autoBind (el: React.ReactNode, options?: any): React.ReactNode;
 
 interface IfProps {
   condition: boolean;
