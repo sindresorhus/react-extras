@@ -11,35 +11,35 @@ export const canUseDOM: boolean;
 export function autoBind (el: React.ReactNode, options?: any): React.ReactNode;
 
 interface IfProps {
-  condition: boolean;
-  children?: React.ReactNode;
-  render?: () => React.ReactNode;
+	condition: boolean;
+	children?: React.ReactNode;
+	render?: () => React.ReactNode;
 }
 
 export class If extends React.Component<IfProps> {}
 
 interface ChooseOtherwiseProps {
-  children?: React.ReactNode;
-  render?: () => React.ReactNode;
+	children?: React.ReactNode;
+	render?: () => React.ReactNode;
 }
 
 export class ChooseOtherwise extends React.Component<ChooseOtherwiseProps> {}
 
 export class Choose extends React.Component {
-  static When: typeof If;
-  static Otherwise: typeof ChooseOtherwise;
+	static When: typeof If;
+	static Otherwise: typeof ChooseOtherwise;
 }
 
 interface ForProps {
-  of: any[];
-  render?: (item: any, index: number) => React.ReactNode;
+	of: any[];
+	render?: (item: any, index: number) => React.ReactNode;
 }
 
 export class For extends React.Component<ForProps> {}
 
 interface ElementClassProps {
-  add?: string;
-  remove?: string;
+	add?: string;
+	remove?: string;
 }
 
 export class RootClass extends React.Component<ElementClassProps> {}
