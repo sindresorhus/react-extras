@@ -10,6 +10,7 @@
 		"url": "sindresorhus.com"
 	},
 	"main": "./dist/index.js",
+	"typings": "./index.d.ts",
 	"engines": {
 		"node": ">=8"
 	},
@@ -19,7 +20,8 @@
 		"prepublishOnly": "npm run build"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"index.d.ts"
 	],
 	"keywords": [
 		"react",
