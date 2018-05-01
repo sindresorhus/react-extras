@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+export function autoBind(el: React.ReactNode, options?: any): React.ReactNode;
+
 export function classNames(...args: any[]): string;
 
 export function isStatelessComponent(component: React.ComponentClass): boolean;
@@ -7,8 +9,6 @@ export function isStatelessComponent(component: React.ComponentClass): boolean;
 export function getDisplayName(component: React.ComponentClass): string;
 
 export const canUseDOM: boolean;
-
-export function autoBind(el: React.ReactNode, options?: any): React.ReactNode;
 
 interface IfProps {
 	condition: boolean;

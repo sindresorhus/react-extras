@@ -15,7 +15,7 @@
 		"node": ">=8"
 	},
 	"scripts": {
-		"build": "babel index.js --out-dir=dist",
+		"build": "babel index.js auto-bind.js --out-dir=dist",
 		"test": "xo && ava",
 		"prepublishOnly": "npm run build"
 	},

@@ -4,7 +4,7 @@ import React from 'react';
 import {renderIntoDocument} from 'react-dom/test-utils';
 import render from 'react-test-renderer';
 import browserEnv from 'browser-env';
-import {
+import { // eslint-disable-line unicorn/import-index
 	classNames,
 	If,
 	For,

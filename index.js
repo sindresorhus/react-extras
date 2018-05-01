@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
-import _autoBind from 'auto-bind';
+import _autoBind from './auto-bind';
 
 export const autoBind = _autoBind.react;
 
@@ -24,6 +24,15 @@ export const classNames = (...args) => {
 
 	return [...ret].join(' ');
 };
+
+export const isStatelessComponent = Component => !(
+	typeof Component.prototype !== 'undefined' &&
+	typeof Component.prototype.render === 'function'
+);
+
+export const getDisplayName = Component => Component.displayName || Component.name || 'Component';
+
+export const canUseDOM = typeof window !== 'undefined' && 'document' in window && 'createElement' in window.document;
 
 export const If = props => props.condition ? (props.render ? props.render() : props.children) : null;
 If.propTypes = {
@@ -115,12 +124,3 @@ export class BodyClass extends ElementClass {
 	}
 }
 BodyClass.propTypes = ElementClass.propTypes;
-
-export const isStatelessComponent = Component => !(
-	typeof Component.prototype !== 'undefined' &&
-	typeof Component.prototype.render === 'function'
-);
-
-export const getDisplayName = Component => Component.displayName || Component.name || 'Component';
-
-export const canUseDOM = typeof window !== 'undefined' && 'document' in window && 'createElement' in window.document;
