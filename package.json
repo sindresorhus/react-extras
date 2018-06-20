@@ -10,12 +10,11 @@
 		"url": "sindresorhus.com"
 	},
 	"main": "./dist/index.js",
-	"typings": "./index.d.ts",
 	"engines": {
 		"node": ">=8"
 	},
 	"scripts": {
-		"build": "babel index.js auto-bind.js --out-dir=dist",
+		"build": "babel index.js auto-bind.js class-names.js --out-dir=dist",
 		"test": "xo && ava",
 		"prepublishOnly": "npm run build"
 	},
@@ -70,8 +69,7 @@
 		],
 		"parser": "babel-eslint",
 		"rules": {
-			"import/no-unresolved": "off",
-			"import/prefer-default-export": "off"
+			"import/no-unresolved": "off"
 		}
 	},
 	"ava": {
