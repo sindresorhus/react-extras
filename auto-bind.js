@@ -31,11 +31,15 @@ module.exports = (self, options) => {
 
 const excludedReactMethods = [
 	'componentWillMount',
+	'UNSAFE_componentWillMount',
 	'render',
+	'getSnapshotBeforeUpdate',
 	'componentDidMount',
 	'componentWillReceiveProps',
+	'UNSAFE_componentWillReceiveProps',
 	'shouldComponentUpdate',
 	'componentWillUpdate',
+	'UNSAFE_componentWillUpdate',
 	'componentDidUpdate',
 	'componentWillUnmount',
 	'componentDidCatch',
