@@ -52,7 +52,7 @@ Choose.Otherwise.propTypes = {
 export const For = ({render, of}) => of.map((item, index) => render(item, index));
 For.propTypes = {
 	of: PropTypes.array.isRequired,
-	render: PropTypes.func
+	render: PropTypes.func.isRequired
 };
 
 class ElementClass extends React.PureComponent {
