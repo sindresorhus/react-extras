@@ -97,6 +97,15 @@ test('<For>', t => {
 	snapshotJSX(t, <For of={['🌈', '🦄', '😎']} render={(item, index) =>
 		<button key={index}>{item}</button>
 	}/>);
+
+	const error = t.throws(() => snapshotJSX(t, <For of={['🌈', '🦄', '😎']}/>), Error);
+	error.message = error.message.replace(/(\n|\r| +(?= ))/g, '');
+
+	const expectedErrorMessage = (
+		'Warning: Failed prop type: The prop `render` is marked as required ' +
+		'in `For`, but its value is `undefined`. in For'
+	);
+	t.is(error.message, expectedErrorMessage);
 });
 
 test('<RootClass/>', t => {

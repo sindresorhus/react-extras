@@ -54,6 +54,7 @@
 		"babel-preset-react": "^6.24.1",
 		"babel-preset-stage-3": "^6.24.1",
 		"browser-env": "^3.2.4",
+		"jest-prop-type-error": "^1.1.0",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-test-renderer": "^16.2.0",
@@ -74,7 +75,8 @@
 	},
 	"ava": {
 		"require": [
-			"babel-register"
+			"babel-register",
+			"jest-prop-type-error"
 		],
 		"babel": "inherit"
 	},
