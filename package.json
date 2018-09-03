@@ -42,17 +42,17 @@
 		"classes"
 	],
 	"dependencies": {
-		"auto-bind": "^1.2.0",
 		"prop-types": "^15.6.0"
 	},
 	"devDependencies": {
-		"ava": "*",
-		"babel-cli": "^6.26.0",
-		"babel-eslint": "^8.0.3",
-		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-		"babel-preset-env": "^1.6.1",
-		"babel-preset-react": "^6.24.1",
-		"babel-preset-stage-3": "^6.24.1",
+		"@babel/cli": "^7.0.0",
+		"@babel/core": "^7.0.0",
+		"@babel/plugin-transform-modules-commonjs": "^7.0.0",
+		"@babel/preset-env": "^7.0.0",
+		"@babel/preset-react": "^7.0.0",
+		"@babel/register": "^7.0.0",
+		"ava": "^1.0.0-beta.8",
+		"babel-eslint": "^9.0.0",
 		"browser-env": "^3.2.4",
 		"jest-prop-type-error": "^1.1.0",
 		"react": "^16.2.0",
@@ -71,23 +71,26 @@
 		"parser": "babel-eslint",
 		"rules": {
 			"import/no-unresolved": "off"
-		}
+		},
+		"ignores": [
+			"*.d.ts",
+			"auto-bind.js",
+			"class-names.js"
+		]
 	},
 	"ava": {
 		"require": [
-			"babel-register",
+			"@babel/register",
 			"jest-prop-type-error"
-		],
-		"babel": "inherit"
+		]
 	},
 	"babel": {
 		"plugins": [
-			"transform-es2015-modules-commonjs"
+			"@babel/plugin-transform-modules-commonjs"
 		],
 		"presets": [
-			"env",
-			"react",
-			"stage-3"
+			"@babel/preset-env",
+			"@babel/preset-react"
 		]
 	}
 }
