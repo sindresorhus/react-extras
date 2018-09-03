@@ -58,7 +58,7 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-test-renderer": "^16.2.0",
-		"xo": "*"
+		"xo": "^0.23.0"
 	},
 	"peerDependencies": {
 		"react": ">=16"
@@ -73,7 +73,6 @@
 			"import/no-unresolved": "off"
 		},
 		"ignores": [
-			"*.d.ts",
 			"auto-bind.js",
 			"class-names.js"
 		]
