@@ -1,8 +1,13 @@
 import * as React from 'react';
 
-export function autoBind(el: React.ReactNode, options?: any): React.ReactNode;
+interface AutoBindOptions {
+	include?: Array<string | RegExp>
+	exclude?: Array<string | RegExp>
+}
 
-export function classNames(...args: any[]): string;
+export function autoBind(element: React.ReactNode, options?: AutoBindOptions): React.ReactNode;
+
+export function classNames(...args: Array<string | {[key: string]: unknown}>): string;
 
 export function isStatelessComponent(component: React.ComponentClass): boolean;
 
@@ -31,8 +36,8 @@ export class Choose extends React.Component {
 }
 
 interface ForProps {
-	of: any[];
-	render?: (item: any, index: number) => React.ReactNode;
+	of: unknown[];
+	render?: (item: unknown, index: number) => React.ReactNode;
 }
 
 export class For extends React.Component<ForProps> {}

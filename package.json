@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"build": "babel index.js auto-bind.js class-names.js --out-dir=dist",
-		"test": "xo && ava",
+		"test": "xo && ava && tsd-check",
 		"prepublishOnly": "npm run build"
 	},
 	"files": [
@@ -58,6 +58,7 @@
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
 		"react-test-renderer": "^16.7.0",
+		"tsd-check": "^0.3.0",
 		"xo": "^0.23.0"
 	},
 	"peerDependencies": {
