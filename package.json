@@ -45,19 +45,19 @@
 		"prop-types": "^15.6.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.0.0",
-		"@babel/core": "^7.0.0",
-		"@babel/plugin-transform-modules-commonjs": "^7.0.0",
-		"@babel/preset-env": "^7.0.0",
+		"@babel/cli": "^7.2.3",
+		"@babel/core": "^7.2.2",
+		"@babel/plugin-transform-modules-commonjs": "^7.2.0",
+		"@babel/preset-env": "^7.2.3",
 		"@babel/preset-react": "^7.0.0",
 		"@babel/register": "^7.0.0",
-		"ava": "^1.0.0-beta.8",
-		"babel-eslint": "^9.0.0",
+		"ava": "^1.0.1",
+		"babel-eslint": "^10.0.1",
 		"browser-env": "^3.2.4",
 		"jest-prop-type-error": "^1.1.0",
-		"react": "^16.2.0",
-		"react-dom": "^16.2.0",
-		"react-test-renderer": "^16.2.0",
+		"react": "^16.7.0",
+		"react-dom": "^16.7.0",
+		"react-test-renderer": "^16.7.0",
 		"xo": "^0.23.0"
 	},
 	"peerDependencies": {
