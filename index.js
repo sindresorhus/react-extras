@@ -49,6 +49,8 @@ Choose.Otherwise.propTypes = {
 	render: PropTypes.func
 };
 
+export {default as Image} from './source/image';
+
 export const For = ({render, of}) => of.map((item, index) => render(item, index));
 For.propTypes = {
 	of: PropTypes.array.isRequired,

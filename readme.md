@@ -178,6 +178,21 @@ Or you could just use plain JavaScript:
 </div>
 ```
 
+### `<Image/>`
+
+React component that improves the `<img>` element.
+
+It makes the image invisible if it fails to load instead of showing the default broken image icon. Optionally, specify a fallback image URL.
+
+```jsx
+<Image
+	url="https://sindresorhus.com/unicorn.jpg"
+	fallbackUrl="https://sindresorhus.com/rainbow.jpg"
+/>
+```
+
+It supports all the props that `<img>` supports, but you use the prop `url` instead of `src`.
+
 ### `<RootClass/>`
 
 Renderless React component that can add and remove classes to the root `<html>` element. It accepts an `add` prop for adding classes, and a `remove` prop for removing classes. Both accept either a single class or multiple classes separated by space.

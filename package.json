@@ -14,7 +14,7 @@
 		"node": ">=8"
 	},
 	"scripts": {
-		"build": "babel index.js auto-bind.js class-names.js --out-dir=dist",
+		"build": "babel index.js auto-bind.js class-names.js 'source/*.js' --out-dir=dist",
 		"test": "xo && ava && tsd-check",
 		"prepublishOnly": "npm run build"
 	},
@@ -71,7 +71,8 @@
 		],
 		"parser": "babel-eslint",
 		"rules": {
-			"import/no-unresolved": "off"
+			"import/no-unresolved": "off",
+			"no-unused-vars": "off"
 		},
 		"ignores": [
 			"auto-bind.js",

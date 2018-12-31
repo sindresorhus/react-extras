@@ -9,6 +9,7 @@ import { // eslint-disable-line unicorn/import-index
 	If,
 	For,
 	Choose,
+	Image,
 	RootClass,
 	BodyClass,
 	isStatelessComponent,
@@ -106,6 +107,10 @@ test('<For>', t => {
 		'in `For`, but its value is `undefined`. in For'
 	);
 	t.is(error.message, expectedErrorMessage);
+});
+
+test('<Image>', t => {
+	snapshotJSX(t, <Image url="https://sindresorhus.com/unicorn"/>);
 });
 
 test('<RootClass/>', t => {

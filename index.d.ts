@@ -42,6 +42,13 @@ interface ForProps {
 
 export class For extends React.Component<ForProps> {}
 
+interface ImageProps extends React.HTMLProps<HTMLImageElement> {
+	url: string;
+	fallbackUrl: string;
+}
+
+export class Image extends React.Component<ImageProps> {}
+
 interface ElementClassProps {
 	add?: string;
 	remove?: string;
