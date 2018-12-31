@@ -14,7 +14,7 @@ import { // eslint-disable-line unicorn/import-index
 	BodyClass,
 	isStatelessComponent,
 	getDisplayName
-} from '../index';
+} from '../source';
 
 browserEnv();
 

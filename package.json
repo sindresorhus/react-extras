@@ -14,7 +14,7 @@
 		"node": ">=8"
 	},
 	"scripts": {
-		"build": "babel index.js auto-bind.js class-names.js 'source/*.js' --out-dir=dist",
+		"build": "babel 'source/*.js' --out-dir=dist",
 		"test": "xo && ava && tsd-check",
 		"prepublishOnly": "npm run build"
 	},
@@ -42,7 +42,7 @@
 		"classes"
 	],
 	"dependencies": {
-		"prop-types": "^15.6.0"
+		"prop-types": "^15.6.2"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.2.3",
@@ -53,7 +53,7 @@
 		"@babel/register": "^7.0.0",
 		"ava": "^1.0.1",
 		"babel-eslint": "^10.0.1",
-		"browser-env": "^3.2.4",
+		"browser-env": "^3.2.5",
 		"jest-prop-type-error": "^1.1.0",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
@@ -62,7 +62,7 @@
 		"xo": "^0.23.0"
 	},
 	"peerDependencies": {
-		"react": ">=16"
+		"react": ">=16.7"
 	},
 	"xo": {
 		"envs": [
@@ -75,8 +75,8 @@
 			"no-unused-vars": "off"
 		},
 		"ignores": [
-			"auto-bind.js",
-			"class-names.js"
+			"source/auto-bind.js",
+			"source/class-names.js"
 		]
 	},
 	"ava": {
