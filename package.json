@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"build": "babel 'source/*.js' --out-dir=dist",
-		"test": "xo && ava && tsd-check",
+		"test": "xo && ava && tsd",
 		"prepublishOnly": "npm run build"
 	},
 	"files": [
@@ -42,6 +42,7 @@
 		"classes"
 	],
 	"dependencies": {
+		"@types/react": "^16.9.2",
 		"prop-types": "^15.6.2"
 	},
 	"devDependencies": {
@@ -58,7 +59,7 @@
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
 		"react-test-renderer": "^16.7.0",
-		"tsd-check": "^0.3.0",
+		"tsd": "^0.7.4",
 		"xo": "^0.23.0"
 	},
 	"peerDependencies": {
