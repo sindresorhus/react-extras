@@ -21,7 +21,8 @@ Automatically binds your `Component` subclass methods to the instance.
 
 @example
 ```
-import autoBind = require('auto-bind');
+import {autoBind} = require('react-extras');
+
 class Foo extends Component {
 	constructor(props) {
 		super(props);
@@ -43,6 +44,8 @@ Conditionally join CSS class names together.
 
 @example
 ```
+import {classNames} = require('react-extras');
+
 classNames('unicorn', 'rainbow');
 //=> 'unicorn rainbow'
 
@@ -59,6 +62,8 @@ classNames({[`button-${buttonType}`]: true});
 
 @example
 ```
+import {classNames} = require('react-extras');
+
 const Button = props => {
 	const buttonClass = classNames(
 		'button',
@@ -127,6 +132,8 @@ If you need it to not be evaluated on `false`, you can pass a function to the `r
 
 @example
 ```
+import {If} = require('react-extras');
+
 <div>
 	<If condition={props.error} render={() => (
 		<h1>{props.error}</h1>
@@ -171,6 +178,8 @@ Note that even when the children are not rendered, they're still evaluated.
 
 @example
 ```
+import {Choose} = require('react-extras');
+
 <div>
 	<Choose>
 		<Choose.When condition={props.success}>
@@ -236,6 +245,8 @@ React component that iterates over the `of` prop and renders the `render` prop.
 
 @example
 ```
+import {For} = require('react-extras');
+
 <div>
 	<For of={['🌈', '🦄', '😎']} render={(item, index) =>
 		<button key={index}>{item}</button>
@@ -277,6 +288,8 @@ It makes the image invisible if it fails to load instead of showing the default 
 
 @example
 ```
+import {Image} = require('react-extras');
+
 <Image
 	url="https://sindresorhus.com/unicorn.jpg"
 	fallbackUrl="https://sindresorhus.com/rainbow.jpg"
@@ -308,6 +321,8 @@ Renderless React component that can add and remove classes to the root `<html>` 
 
 @example
 ```
+import {If, RootClass} = require('react-extras');
+
 <If condition={props.isDarkMode}>
 	<RootClass add="dark-mode"/>
 </If>
@@ -315,6 +330,8 @@ Renderless React component that can add and remove classes to the root `<html>` 
 
 @example
 ```
+import {RootClass} = require('react-extras');
+
 <RootClass add="logged-in paid-user" remove="promo"/>
 ```
 */

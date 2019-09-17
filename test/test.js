@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars, no-return-assign */
+/* eslint-disable no-return-assign */
 import {serial as test} from 'ava';
 import React from 'react';
 import {renderIntoDocument} from 'react-dom/test-utils';
 import render from 'react-test-renderer';
 import browserEnv from 'browser-env';
-import { // eslint-disable-line unicorn/import-index
+import {
 	classNames,
 	If,
 	For,

@@ -42,7 +42,6 @@
 		"classes"
 	],
 	"dependencies": {
-		"@types/react": "^16.9.2",
 		"prop-types": "^15.6.2"
 	},
 	"devDependencies": {
@@ -52,7 +51,8 @@
 		"@babel/preset-env": "^7.2.3",
 		"@babel/preset-react": "^7.0.0",
 		"@babel/register": "^7.0.0",
-		"ava": "^1.0.1",
+		"@types/react": "^16.9.2",
+		"ava": "^2.4.0",
 		"babel-eslint": "^10.0.1",
 		"browser-env": "^3.2.5",
 		"jest-prop-type-error": "^1.1.0",
@@ -60,7 +60,7 @@
 		"react-dom": "^16.7.0",
 		"react-test-renderer": "^16.7.0",
 		"tsd": "^0.7.4",
-		"xo": "^0.23.0"
+		"xo": "^0.24.0"
 	},
 	"peerDependencies": {
 		"react": ">=16.7"
