@@ -1,5 +1,6 @@
 import {expectType} from 'tsd';
-import React, {Component as ReactComponent} from 'react';
+import * as React from 'react';
+import {Component as ReactComponent} from 'react';
 import {
 	autoBind,
 	classNames,
@@ -18,9 +19,9 @@ class Bar extends ReactComponent {
 	constructor(props: object) {
 		super(props);
 
-		expectType<Bar>(autoBind(this));
-		expectType<Bar>(autoBind(this, { include: ['foo', /bar/] }));
-		expectType<Bar>(autoBind(this, { exclude: ['foo', /bar/] }));
+		expectType<this>(autoBind(this));
+		expectType<this>(autoBind(this, {include: ['foo', /bar/]}));
+		expectType<this>(autoBind(this, {exclude: ['foo', /bar/]}));
 	}
 }
 
@@ -73,14 +74,14 @@ const ImageTest = (
 );
 
 const ImageTestNoFallback = (
-	<Image url="https://sindresorhus.com/unicorn.jpg" />
+	<Image url="https://sindresorhus.com/unicorn.jpg"/>
 );
 
-const RootTest = (props: { isDarkMode: boolean }) => (
+const RootTest = (props: {isDarkMode: boolean}) => (
 	<If condition={props.isDarkMode}>
-		<RootClass add="dark-mode" />
-		<RootClass add="logged-in paid-user" remove="promo" />
-		<BodyClass remove="dark-mode" />
-		<BodyClass add="logged-in paid-user" remove="promo" />
+		<RootClass add="dark-mode"/>
+		<RootClass add="logged-in paid-user" remove="promo"/>
+		<BodyClass remove="dark-mode"/>
+		<BodyClass add="logged-in paid-user" remove="promo"/>
 	</If>
 );

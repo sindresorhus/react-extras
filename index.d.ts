@@ -81,7 +81,7 @@ const Button = props => {
 };
 ```
 */
-export function classNames(...input: Array<string | {[className: string]: unknown}>): string;
+export function classNames(...input: Array<string | {[className: string]: any}>): string;
 
 /**
 Returns a boolean of whether the given `Component` is a functional stateless component.
@@ -228,7 +228,7 @@ export class Choose extends ReactComponent {
 	static Otherwise: typeof ChooseOtherwise;
 }
 
-interface ForProps<T = unknown> {
+interface ForProps<T> {
 	/**
 	Items to iterate over. `render` will be called once per item.
 	*/
@@ -265,7 +265,7 @@ Or you could just use plain JavaScript:
 </div>
 ```
 */
-export class For<T = unknown> extends ReactComponent<ForProps<T>> {}
+export class For<T> extends ReactComponent<ForProps<T>> {}
 
 interface ImageProps extends HTMLProps<HTMLImageElement> {
 	/**
