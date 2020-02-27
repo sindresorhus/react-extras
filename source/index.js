@@ -1,4 +1,4 @@
-export {react as autoBind} from './auto-bind';
+export {default as autoBind} from 'auto-bind/react';
 
 export {default as classNames} from './class-names';
 

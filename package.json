@@ -42,6 +42,7 @@
 		"classes"
 	],
 	"dependencies": {
+		"auto-bind": "^4.0.0",
 		"prop-types": "^15.6.2"
 	},
 	"devDependencies": {
@@ -73,7 +74,6 @@
 			"no-unused-vars": "off"
 		},
 		"ignores": [
-			"source/auto-bind.js",
 			"source/class-names.js"
 		]
 	},
