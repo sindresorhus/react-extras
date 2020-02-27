@@ -1,6 +1,6 @@
 export {default as autoBind} from 'auto-bind/react';
 
-export {default as classNames} from './class-names';
+export {default as classNames} from '@sindresorhus/class-names';
 
 export const isStatelessComponent = Component => !(
 	typeof Component.prototype !== 'undefined' &&

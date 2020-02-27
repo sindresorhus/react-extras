@@ -42,6 +42,7 @@
 		"classes"
 	],
 	"dependencies": {
+		"@sindresorhus/class-names": "^1.1.0",
 		"auto-bind": "^4.0.0",
 		"prop-types": "^15.6.2"
 	},
@@ -72,10 +73,7 @@
 		"rules": {
 			"import/no-unresolved": "off",
 			"no-unused-vars": "off"
-		},
-		"ignores": [
-			"source/class-names.js"
-		]
+		}
 	},
 	"ava": {
 		"require": [
