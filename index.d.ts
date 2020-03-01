@@ -22,7 +22,7 @@ class Foo extends Component {
 }
 ```
 */
-export { autoBind };
+export {autoBind};
 
 /**
 Conditionally join CSS class names together.
@@ -68,7 +68,7 @@ const Button = props => {
 };
 ```
 */
-export { classNames };
+export {classNames};
 
 /**
 Returns a boolean of whether the given `Component` is a functional stateless component.
