@@ -1,16 +1,6 @@
 import {Component as ReactComponent, ComponentClass, HTMLProps, ReactNode} from 'react';
-
-interface AutoBindOptions {
-	/**
-	Bind only the given methods.
-	*/
-	readonly include?: ReadonlyArray<string | RegExp>;
-
-	/**
-	Bind methods except for the given methods.
-	*/
-	readonly exclude?: ReadonlyArray<string | RegExp>;
-}
+import classNames = require('@sindresorhus/class-names');
+import autoBind = require('auto-bind/react');
 
 /**
 Automatically binds your `Component` subclass methods to the instance.
@@ -32,10 +22,7 @@ class Foo extends Component {
 }
 ```
 */
-export function autoBind<T extends ReactNode>(
-	self: T,
-	options?: AutoBindOptions
-): T;
+export {autoBind};
 
 /**
 Conditionally join CSS class names together.
@@ -81,7 +68,7 @@ const Button = props => {
 };
 ```
 */
-export function classNames(...input: Array<string | {[className: string]: any}>): string;
+export {classNames};
 
 /**
 Returns a boolean of whether the given `Component` is a functional stateless component.

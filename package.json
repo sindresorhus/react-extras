@@ -9,6 +9,7 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "sindresorhus.com"
 	},
+	"type": "module",
 	"main": "./dist/index.js",
 	"engines": {
 		"node": ">=8"
@@ -16,7 +17,7 @@
 	"scripts": {
 		"build": "babel 'source/*.js' --out-dir=dist",
 		"test": "xo && ava && tsd",
-		"prepublishOnly": "npm run build"
+		"prepare": "npm run build"
 	},
 	"files": [
 		"dist",
@@ -42,19 +43,19 @@
 		"classes"
 	],
 	"dependencies": {
+		"@sindresorhus/class-names": "^1.1.0",
+		"auto-bind": "^4.0.0",
 		"prop-types": "^15.6.2"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.2.3",
 		"@babel/core": "^7.2.2",
-		"@babel/plugin-transform-modules-commonjs": "^7.2.0",
-		"@babel/preset-env": "^7.2.3",
 		"@babel/preset-react": "^7.0.0",
 		"@babel/register": "^7.0.0",
 		"@types/react": "^16.9.2",
 		"ava": "^2.4.0",
-		"babel-eslint": "^10.0.1",
 		"browser-env": "^3.2.5",
+		"esm": "^3.2.25",
 		"jest-prop-type-error": "^1.1.0",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
@@ -70,28 +71,20 @@
 			"node",
 			"browser"
 		],
-		"parser": "babel-eslint",
 		"rules": {
 			"import/no-unresolved": "off",
 			"no-unused-vars": "off"
-		},
-		"ignores": [
-			"source/auto-bind.js",
-			"source/class-names.js"
-		]
+		}
 	},
 	"ava": {
 		"require": [
+			"esm",
 			"@babel/register",
 			"jest-prop-type-error"
 		]
 	},
 	"babel": {
-		"plugins": [
-			"@babel/plugin-transform-modules-commonjs"
-		],
 		"presets": [
-			"@babel/preset-env",
 			"@babel/preset-react"
 		]
 	}
