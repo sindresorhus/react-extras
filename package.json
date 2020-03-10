@@ -9,6 +9,7 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "sindresorhus.com"
 	},
+	"type": "module",
 	"main": "./dist/index.js",
 	"engines": {
 		"node": ">=8"
@@ -65,7 +66,6 @@
 	"peerDependencies": {
 		"react": ">=16.7"
 	},
-	"type": "module",
 	"xo": {
 		"envs": [
 			"node",
