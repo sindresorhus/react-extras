@@ -19,14 +19,14 @@ export const canUseDOM = (
 	'createElement' in window.document
 );
 
-export {default as If} from './if';
+export {default as If} from './if.js';
 
-export {default as Choose} from './choose';
+export {default as Choose} from './choose.js';
 
-export {default as For} from './for';
+export {default as For} from './for.js';
 
-export {default as Image} from './image';
+export {default as Image} from './image.js';
 
-export {default as RootClass} from './root-class';
+export {default as RootClass} from './root-class.js';
 
-export {default as BodyClass} from './body-class';
+export {default as BodyClass} from './body-class.js';

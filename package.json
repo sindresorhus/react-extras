@@ -4,15 +4,16 @@
 	"description": "Useful components and utilities for working with React",
 	"license": "MIT",
 	"repository": "sindresorhus/react-extras",
+	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
+		"url": "https://sindresorhus.com"
 	},
 	"type": "module",
 	"main": "./dist/index.js",
 	"engines": {
-		"node": ">=8"
+		"node": ">=10"
 	},
 	"scripts": {
 		"build": "babel 'source/*.js' --out-dir=dist",
@@ -72,8 +73,10 @@
 			"browser"
 		],
 		"rules": {
-			"import/no-unresolved": "off",
-			"no-unused-vars": "off"
+			"import/extensions": "off",
+			"no-unused-vars": "off",
+			"@typescript-eslint/no-unused-vars": "off",
+			"@typescript-eslint/explicit-function-return-type": "off"
 		}
 	},
 	"ava": {

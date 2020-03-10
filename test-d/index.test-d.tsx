@@ -39,7 +39,7 @@ const IfTest = (props: {error: boolean}) => (
 			<h1>{props.error}</h1>
 		)}/>
 	</div>
-)
+);
 
 const ForTest = (
 	<div>
@@ -50,7 +50,7 @@ const ForTest = (
 	</div>
 );
 
-const ChooseTest = (props: {success: boolean, error: boolean}) => (
+const ChooseTest = (props: {success: boolean; error: boolean}) => (
 	<div>
 		<Choose>
 			<Choose.When condition={props.success}>

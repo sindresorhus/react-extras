@@ -100,7 +100,7 @@ test('<For>', t => {
 	}/>);
 
 	const error = t.throws(() => snapshotJSX(t, <For of={['🌈', '🦄', '😎']}/>), Error);
-	error.message = error.message.replace(/(\n|\r| +(?= ))/g, '');
+	error.message = error.message.replace(/\n|\r| +(?= )/g, '');
 
 	const expectedErrorMessage = (
 		'Warning: Failed prop type: The prop `render` is marked as required ' +
