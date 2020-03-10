@@ -65,6 +65,7 @@
 	"peerDependencies": {
 		"react": ">=16.7"
 	},
+	"type": "module",
 	"xo": {
 		"envs": [
 			"node",
