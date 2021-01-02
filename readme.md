@@ -1,4 +1,4 @@
-# react-extras [![Build Status](https://travis-ci.org/sindresorhus/react-extras.svg?branch=master)](https://travis-ci.org/sindresorhus/react-extras)
+# react-extras
 
 > Useful components and utilities for working with [React](https://reactjs.org)
 
