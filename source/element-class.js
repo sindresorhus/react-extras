@@ -35,5 +35,5 @@ export default class ElementClass extends React.PureComponent {
 
 ElementClass.propTypes = {
 	add: PropTypes.string,
-	remove: PropTypes.string
+	remove: PropTypes.string,
 };

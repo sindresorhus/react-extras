@@ -6,7 +6,7 @@ const If = props => props.condition ? (props.render ? props.render() : props.chi
 If.propTypes = {
 	condition: PropTypes.bool.isRequired,
 	children: PropTypes.node,
-	render: PropTypes.func
+	render: PropTypes.func,
 };
 
 export default If;

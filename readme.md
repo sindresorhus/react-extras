@@ -2,13 +2,11 @@
 
 > Useful components and utilities for working with [React](https://reactjs.org)
 
-
 ## Install
 
+```sh
+npm install react-extras
 ```
-$ npm install react-extras
-```
-
 
 ## Usage
 
@@ -25,10 +23,9 @@ const App = props => (
 );
 ```
 
-
 ## API
 
-### autoBind(self, [options])
+### autoBind(self, options?)
 
 Automatically binds your `React.Component` subclass methods to the instance. See the [`autoBind.react()` docs](https://github.com/sindresorhus/auto-bind#autobindreactself-options).
 
@@ -38,11 +35,13 @@ Conditionally join CSS class names together.
 
 #### input
 
-Type: `string` `Object`
+Type: `string | object`
 
 Accepts a combination of strings and objects. Only object keys with truthy values are included. Anything else is ignored.
 
 ```js
+import {classNames} from 'react-extras';
+
 classNames('unicorn', 'rainbow');
 //=> 'unicorn rainbow'
 
@@ -58,6 +57,8 @@ classNames({[`button-${buttonType}`]: true});
 ```
 
 ```jsx
+import {classNames} from 'react-extras';
+
 const Button = props => {
 	console.log(props);
 	/*
@@ -92,6 +93,8 @@ Beware that even though the children are not rendered when the `condition` is `f
 If you need it to not be evaluated on `false`, you can pass a function to the `render` prop that returns the children:
 
 ```jsx
+import {If} from 'react-extras';
+
 <div>
 	<If condition={props.error} render={() => (
 		<h1>{props.error}</h1>
@@ -102,6 +105,8 @@ If you need it to not be evaluated on `false`, you can pass a function to the `r
 Or you could just use plain JavaScript:
 
 ```jsx
+import {If} from 'react-extras';
+
 <div>
 	{props.error && (
 		<h1>{props.error}</h1>
@@ -119,6 +124,8 @@ React component similar to a switch case. `<Choose>` has 2 children components:
 Note that even when the children are not rendered, they're still evaluated.
 
 ```jsx
+import {Choose} from 'react-extras';
+
 <div>
 	<Choose>
 		<Choose.When condition={props.success}>
@@ -157,6 +164,8 @@ Or you could just use plain JavaScript:
 React component that iterates over the `of` prop and renders the `render` prop.
 
 ```jsx
+import {For} from 'react-extras';
+
 <div>
 	<For of={['🌈', '🦄', '😎']} render={(item, index) =>
 		<button key={index}>{item}</button>
@@ -181,6 +190,8 @@ React component that improves the `<img>` element.
 It makes the image invisible if it fails to load instead of showing the default broken image icon. Optionally, specify a fallback image URL.
 
 ```jsx
+import {Image} from 'react-extras';
+
 <Image
 	url="https://sindresorhus.com/unicorn.jpg"
 	fallbackUrl="https://sindresorhus.com/rainbow.jpg"
@@ -194,12 +205,16 @@ It supports all the props that `<img>` supports, but you use the prop `url` inst
 Renderless React component that can add and remove classes to the root `<html>` element. It accepts an `add` prop for adding classes, and a `remove` prop for removing classes. Both accept either a single class or multiple classes separated by space.
 
 ```jsx
+import {RootClass} from 'react-extras';
+
 <If condition={props.isDarkMode}>
 	<RootClass add="dark-mode"/>
 </If>
 ```
 
 ```jsx
+import {RootClass} from 'react-extras';
+
 <RootClass add="logged-in paid-user" remove="promo"/>
 ```
 
@@ -243,14 +258,8 @@ Returns the [display name](https://reactjs.org/docs/react-component.html#display
 
 A boolean of whether you're running in a context with a [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). Can be used to check if your component is running in the browser or if it's being server-rendered.
 
-
 ## Related
 
 - [react-router-util](https://github.com/sindresorhus/react-router-util) - Useful components and utilities for working with React Router
 - [sass-extras](https://github.com/sindresorhus/sass-extras) - Useful utilities for working with Sass
 - [class-names](https://github.com/sindresorhus/class-names) - Conditionally join CSS class names together
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)

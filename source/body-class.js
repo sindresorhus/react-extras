@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ElementClass from './element-class';
+import ElementClass from './element-class.js';
 
 export default class BodyClass extends ElementClass {
 	constructor() {

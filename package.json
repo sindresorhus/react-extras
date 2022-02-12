@@ -13,11 +13,11 @@
 	"type": "module",
 	"exports": "./dist/index.js",
 	"engines": {
-		"node": ">=10"
+		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
 	},
 	"scripts": {
 		"build": "babel 'source/*.js' --out-dir=dist",
-		"test": "xo && ava && tsd",
+		"test": "xo && tsd",
 		"prepare": "npm run build"
 	},
 	"files": [
@@ -44,28 +44,29 @@
 		"classes"
 	],
 	"dependencies": {
-		"@sindresorhus/class-names": "^1.1.0",
-		"auto-bind": "^4.0.0",
-		"prop-types": "^15.6.2"
+		"@sindresorhus/class-names": "^2.0.0",
+		"auto-bind": "^5.0.1",
+		"prop-types": "^15.8.1"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.2.3",
-		"@babel/core": "^7.2.2",
-		"@babel/preset-react": "^7.0.0",
-		"@babel/register": "^7.0.0",
-		"@types/react": "^16.9.2",
-		"ava": "^2.4.0",
-		"browser-env": "^3.2.5",
+		"@ava/babel": "^2.0.0",
+		"@babel/cli": "^7.17.0",
+		"@babel/core": "^7.17.2",
+		"@babel/preset-react": "^7.16.7",
+		"@babel/register": "^7.17.0",
+		"@types/react": "^17.0.39",
+		"ava": "^3.15.0",
+		"browser-env": "^3.3.0",
 		"esm": "^3.2.25",
 		"jest-prop-type-error": "^1.1.0",
-		"react": "^16.7.0",
-		"react-dom": "^16.7.0",
-		"react-test-renderer": "^16.7.0",
-		"tsd": "^0.9.0",
-		"xo": "^0.25.3"
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-test-renderer": "^17.0.2",
+		"tsd": "^0.19.1",
+		"xo": "^0.48.0"
 	},
 	"peerDependencies": {
-		"react": ">=16.7"
+		"react": ">=17"
 	},
 	"xo": {
 		"envs": [
@@ -73,15 +74,16 @@
 			"browser"
 		],
 		"rules": {
-			"import/extensions": "off",
 			"no-unused-vars": "off",
 			"@typescript-eslint/no-unused-vars": "off",
-			"@typescript-eslint/explicit-function-return-type": "off"
+			"@typescript-eslint/naming-convention": "off",
+			"@typescript-eslint/no-unsafe-call": "off",
+			"node/file-extension-in-import": "off"
 		}
 	},
 	"ava": {
+		"babel": true,
 		"require": [
-			"esm",
 			"@babel/register",
 			"jest-prop-type-error"
 		]

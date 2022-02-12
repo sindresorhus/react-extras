@@ -5,7 +5,7 @@ const For = ({render, of}) => of.map((item, index) => render(item, index));
 
 For.propTypes = {
 	of: PropTypes.array.isRequired,
-	render: PropTypes.func.isRequired
+	render: PropTypes.func.isRequired,
 };
 
 export default For;

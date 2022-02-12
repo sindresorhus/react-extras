@@ -12,11 +12,11 @@ import {
 	For,
 	Image,
 	RootClass,
-	BodyClass
-} from '..';
+	BodyClass,
+} from '../index.js';
 
 class Bar extends ReactComponent {
-	constructor(props: object) {
+	constructor(props: Record<string, unknown>) {
 		super(props);
 
 		expectType<this>(autoBind(this));

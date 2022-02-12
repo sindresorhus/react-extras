@@ -13,8 +13,8 @@ import {
 	RootClass,
 	BodyClass,
 	isStatelessComponent,
-	getDisplayName
-} from '../source';
+	getDisplayName,
+} from '../source/index.js';
 
 browserEnv();
 
@@ -23,11 +23,11 @@ const snapshotJSX = (t, jsx) => t.snapshot(render.create(jsx).toJSON());
 test('classNames', t => {
 	t.is(classNames('x'), 'x');
 	t.is(classNames('x', 'y'), 'x y');
-	t.is(classNames(null, 'x', undefined, NaN, 0, 4, true, 'y', false, ''), 'x y');
+	t.is(classNames(null, 'x', undefined, Number.NaN, 0, 4, true, 'y', false, ''), 'x y');
 	t.is(classNames('x', {
 		y: true,
 		nope: false,
-		z: 'foo'
+		z: 'foo',
 	}), 'x y z');
 });
 
@@ -103,8 +103,8 @@ test('<For>', t => {
 	error.message = error.message.replace(/\n|\r| +(?= )/g, '');
 
 	const expectedErrorMessage = (
-		'Warning: Failed prop type: The prop `render` is marked as required ' +
-		'in `For`, but its value is `undefined`. in For'
+		'Warning: Failed prop type: The prop `render` is marked as required '
+		+ 'in `For`, but its value is `undefined`. in For'
 	);
 	t.is(error.message, expectedErrorMessage);
 });
@@ -114,31 +114,31 @@ test('<Image>', t => {
 });
 
 test('<RootClass/>', t => {
-	const el = document.documentElement;
+	const element = document.documentElement;
 
 	renderIntoDocument(<RootClass add="foo"/>);
-	t.true(el.classList.contains('foo'));
+	t.true(element.classList.contains('foo'));
 	renderIntoDocument(<RootClass remove="foo"/>);
-	t.false(el.classList.contains('foo'));
-	el.className = '';
+	t.false(element.classList.contains('foo'));
+	element.className = '';
 
 	renderIntoDocument(<RootClass add="foo bar"/>);
-	t.true(el.classList.contains('foo'));
-	t.true(el.classList.contains('bar'));
+	t.true(element.classList.contains('foo'));
+	t.true(element.classList.contains('bar'));
 	renderIntoDocument(<RootClass remove="foo"/>);
-	t.false(el.classList.contains('foo'));
-	t.true(el.classList.contains('bar'));
-	el.className = '';
+	t.false(element.classList.contains('foo'));
+	t.true(element.classList.contains('bar'));
+	element.className = '';
 });
 
 test('<BodyClass/>', t => {
-	const el = document.body;
+	const element = document.body;
 
 	renderIntoDocument(<BodyClass add="foo"/>);
-	t.true(el.classList.contains('foo'));
+	t.true(element.classList.contains('foo'));
 	renderIntoDocument(<BodyClass remove="foo"/>);
-	t.false(el.classList.contains('foo'));
-	el.className = '';
+	t.false(element.classList.contains('foo'));
+	element.className = '';
 });
 
 test('isStatelessComponent()', t => {

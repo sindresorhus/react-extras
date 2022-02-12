@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import If from './if';
+import If from './if.js';
 
 const Choose = props => {
 	let when = null;
@@ -18,7 +18,7 @@ const Choose = props => {
 };
 
 Choose.propTypes = {
-	children: PropTypes.node
+	children: PropTypes.node,
 };
 
 Choose.When = If;
@@ -27,7 +27,7 @@ Choose.Otherwise = ({render, children}) => render ? render() : children;
 
 Choose.Otherwise.propTypes = {
 	children: PropTypes.node,
-	render: PropTypes.func
+	render: PropTypes.func,
 };
 
 export default Choose;

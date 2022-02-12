@@ -1,6 +1,4 @@
 import {Component as ReactComponent, ComponentClass, HTMLProps, ReactNode} from 'react';
-import classNames = require('@sindresorhus/class-names');
-import autoBind = require('auto-bind/react');
 
 /**
 Automatically binds your `Component` subclass methods to the instance.
@@ -11,7 +9,7 @@ Automatically binds your `Component` subclass methods to the instance.
 
 @example
 ```
-import {autoBind} = require('react-extras');
+import {autoBind} from 'react-extras';
 
 class Foo extends Component {
 	constructor(props) {
@@ -22,7 +20,6 @@ class Foo extends Component {
 }
 ```
 */
-export {autoBind};
 
 /**
 Conditionally join CSS class names together.
@@ -31,7 +28,7 @@ Conditionally join CSS class names together.
 
 @example
 ```
-import {classNames} = require('react-extras');
+import {classNames} from 'react-extras';
 
 classNames('unicorn', 'rainbow');
 //=> 'unicorn rainbow'
@@ -49,7 +46,7 @@ classNames({[`button-${buttonType}`]: true});
 
 @example
 ```
-import {classNames} = require('react-extras');
+import {classNames} from 'react-extras';
 
 const Button = props => {
 	const buttonClass = classNames(
@@ -68,7 +65,6 @@ const Button = props => {
 };
 ```
 */
-export {classNames};
 
 /**
 Returns a boolean of whether the given `Component` is a functional stateless component.
@@ -119,7 +115,7 @@ If you need it to not be evaluated on `false`, you can pass a function to the `r
 
 @example
 ```
-import {If} = require('react-extras');
+import {If} from 'react-extras';
 
 <div>
 	<If condition={props.error} render={() => (
@@ -132,6 +128,8 @@ Or you could just use plain JavaScript:
 
 @example
 ```
+import {If} from 'react-extras';
+
 <div>
 	{props.error && (
 		<h1>{props.error}</h1>
@@ -165,7 +163,7 @@ Note that even when the children are not rendered, they're still evaluated.
 
 @example
 ```
-import {Choose} = require('react-extras');
+import {Choose} from 'react-extras';
 
 <div>
 	<Choose>
@@ -232,7 +230,7 @@ React component that iterates over the `of` prop and renders the `render` prop.
 
 @example
 ```
-import {For} = require('react-extras');
+import {For} from 'react-extras';
 
 <div>
 	<For of={['🌈', '🦄', '😎']} render={(item, index) =>
@@ -275,7 +273,7 @@ It makes the image invisible if it fails to load instead of showing the default 
 
 @example
 ```
-import {Image} = require('react-extras');
+import {Image} from 'react-extras';
 
 <Image
 	url="https://sindresorhus.com/unicorn.jpg"
@@ -308,7 +306,7 @@ Renderless React component that can add and remove classes to the root `<html>` 
 
 @example
 ```
-import {If, RootClass} = require('react-extras');
+import {If, RootClass} from 'react-extras';
 
 <If condition={props.isDarkMode}>
 	<RootClass add="dark-mode"/>
@@ -317,7 +315,7 @@ import {If, RootClass} = require('react-extras');
 
 @example
 ```
-import {RootClass} = require('react-extras');
+import {RootClass} from 'react-extras';
 
 <RootClass add="logged-in paid-user" remove="promo"/>
 ```
@@ -354,3 +352,6 @@ body.dark-mode {
 ```
 */
 export class BodyClass extends ReactComponent<ElementClassProps> {}
+
+export {default as classNames} from '@sindresorhus/class-names';
+export {default as autoBind} from 'auto-bind/react';
