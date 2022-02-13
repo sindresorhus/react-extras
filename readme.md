@@ -105,8 +105,6 @@ import {If} from 'react-extras';
 Or you could just use plain JavaScript:
 
 ```jsx
-import {If} from 'react-extras';
-
 <div>
 	{props.error && (
 		<h1>{props.error}</h1>
