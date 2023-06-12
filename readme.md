@@ -72,7 +72,7 @@ const Button = props => {
 	const buttonClass = classNames(
 		'button',
 		{
-			[`button-${props.type}`]: !!props.type,
+			[`button-${props.type}`]: Boolean(props.type),
 			'button-block': props.isBlock,
 			'button-small': props.isSmall
 		}
