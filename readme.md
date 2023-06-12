@@ -64,16 +64,17 @@ const Button = props => {
 	/*
 	{
 		type: 'success',
-		small: true
+		isBlock: false,
+		isSmall: true
 	}
 	*/
 
 	const buttonClass = classNames(
 		'button',
 		{
-			[`button-${props.type}`]: props.type,
-			'button-block': props.block,
-			'button-small': props.small
+			[`button-${props.type}`]: Boolean(props.type),
+			'button-block': props.isBlock,
+			'button-small': props.isSmall
 		}
 	);
 
