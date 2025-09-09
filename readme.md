@@ -245,6 +245,88 @@ body.dark-mode {
 }
 ```
 
+### intersperse(children, separator?)
+
+Inserts a separator between each element of the children.
+
+#### children
+
+Type: `ReactNode`
+
+The elements to intersperse with separators.
+
+#### separator
+
+Type: `ReactNode | ((index: number, count: number) => ReactNode)`\
+Default: `', '`
+
+The separator to insert between elements. Can be a React node or a function that returns a React node.
+
+```jsx
+import {intersperse} from 'react-extras';
+
+const items = ['Apple', 'Orange', 'Banana'];
+const list = intersperse(
+	items.map(item => <li key={item}>{item}</li>),
+	', '
+);
+// => [<li>Apple</li>, ', ', <li>Orange</li>, ', ', <li>Banana</li>]
+```
+
+With a function separator:
+
+```jsx
+import {intersperse} from 'react-extras';
+
+const items = ['Apple', 'Orange', 'Banana'];
+const list = intersperse(
+	items.map(item => <li key={item}>{item}</li>),
+	(index, count) => index === count - 2 ? ' and ' : ', '
+);
+// => [<li>Apple</li>, ', ', <li>Orange</li>, ' and ', <li>Banana</li>]
+```
+
+### `<Join/>`
+
+React component that renders the children with a separator between each element.
+
+```jsx
+import {Join} from 'react-extras';
+
+<Join>
+	<li>Apple</li>
+	<li>Orange</li>
+	<li>Banana</li>
+</Join>
+// => <li>Apple</li>, <li>Orange</li>, <li>Banana</li>
+```
+
+With a custom separator:
+
+```jsx
+import {Join} from 'react-extras';
+
+<Join separator=" | ">
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</Join>
+// => <a href="#">Home</a> | <a href="#">About</a> | <a href="#">Contact</a>
+```
+
+With a function separator:
+
+```jsx
+import {Join} from 'react-extras';
+
+<Join separator={(index, count) => index === count - 2 ? ' and ' : ', '}>
+	<span>Apple</span>
+	<span>Orange</span>
+	<span>Banana</span>
+</Join>
+// => <span>Apple</span>, <span>Orange</span> and <span>Banana</span>
+```
+
 ### isStatelessComponent(Component)
 
 Returns a boolean of whether the given `Component` is a [functional stateless component](https://javascriptplayground.com/functional-stateless-components-react/).
