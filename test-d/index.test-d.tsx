@@ -68,20 +68,20 @@ const ChooseTest = (props: {success: boolean; error: boolean}) => (
 
 const ImageTest = (
 	<Image
-		url="https://sindresorhus.com/unicorn.jpg"
-		fallbackUrl="https://sindresorhus.com/rainbow.jpg"
+		url='https://sindresorhus.com/unicorn.jpg'
+		fallbackUrl='https://sindresorhus.com/rainbow.jpg'
 	/>
 );
 
 const ImageTestNoFallback = (
-	<Image url="https://sindresorhus.com/unicorn.jpg"/>
+	<Image url='https://sindresorhus.com/unicorn.jpg'/>
 );
 
 const RootTest = (props: {isDarkMode: boolean}) => (
 	<If condition={props.isDarkMode}>
-		<RootClass add="dark-mode"/>
-		<RootClass add="logged-in paid-user" remove="promo"/>
-		<BodyClass remove="dark-mode"/>
-		<BodyClass add="logged-in paid-user" remove="promo"/>
+		<RootClass add='dark-mode'/>
+		<RootClass add='logged-in paid-user' remove='promo'/>
+		<BodyClass remove='dark-mode'/>
+		<BodyClass add='logged-in paid-user' remove='promo'/>
 	</If>
 );

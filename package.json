@@ -15,9 +15,9 @@
 		"types": "./index.d.ts",
 		"default": "./dist/index.js"
 	},
-	"types": "./index.d.ts",
+	"sideEffects": false,
 	"engines": {
-		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+		"node": ">=20"
 	},
 	"scripts": {
 		"build": "babel 'source/*.js' --out-dir=dist",
@@ -54,23 +54,23 @@
 	},
 	"devDependencies": {
 		"@ava/babel": "^2.0.0",
-		"@babel/cli": "^7.17.0",
-		"@babel/core": "^7.17.2",
-		"@babel/preset-react": "^7.16.7",
-		"@babel/register": "^7.17.0",
-		"@types/react": "^17.0.39",
-		"ava": "^3.15.0",
+		"@babel/cli": "^7.28.3",
+		"@babel/core": "^7.28.4",
+		"@babel/preset-react": "^7.27.1",
+		"@babel/register": "^7.28.3",
+		"@types/react": "^19.1.12",
+		"ava": "^6.4.1",
 		"browser-env": "^3.3.0",
 		"esm": "^3.2.25",
 		"jest-prop-type-error": "^1.1.0",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"react-test-renderer": "^17.0.2",
-		"tsd": "^0.19.1",
-		"xo": "^0.48.0"
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"react-test-renderer": "^19.1.1",
+		"tsd": "^0.33.0",
+		"xo": "^0.59.0"
 	},
 	"peerDependencies": {
-		"react": ">=17"
+		"react": ">=19"
 	},
 	"xo": {
 		"envs": [
@@ -82,7 +82,15 @@
 			"@typescript-eslint/no-unused-vars": "off",
 			"@typescript-eslint/naming-convention": "off",
 			"@typescript-eslint/no-unsafe-call": "off",
-			"node/file-extension-in-import": "off"
+			"node/file-extension-in-import": "off",
+			"unicorn/prevent-abbreviations": [
+				"error",
+				{
+					"replacements": {
+						"props": false
+					}
+				}
+			]
 		}
 	},
 	"ava": {

@@ -3,7 +3,7 @@ export {default as autoBind} from 'auto-bind/react';
 export {default as classNames} from '@sindresorhus/class-names';
 
 export const isStatelessComponent = Component => !(
-	typeof Component.prototype !== 'undefined'
+	Component.prototype !== undefined
 	&& typeof Component.prototype.render === 'function'
 );
 
@@ -14,9 +14,9 @@ export const getDisplayName = Component => (
 );
 
 export const canUseDOM = (
-	typeof window !== 'undefined'
-	&& 'document' in window
-	&& 'createElement' in window.document
+	globalThis.window !== undefined
+	&& 'document' in globalThis
+	&& 'createElement' in globalThis.document
 );
 
 export {default as If} from './if.js';

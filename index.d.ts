@@ -1,4 +1,9 @@
-import {Component as ReactComponent, ComponentClass, HTMLProps, ReactNode} from 'react';
+import {
+	Component as ReactComponent,
+	type ComponentClass,
+	type HTMLProps,
+	type ReactNode,
+} from 'react';
 
 /**
 Automatically binds your `Component` subclass methods to the instance.
@@ -89,7 +94,7 @@ Can be used to check if your component is running in the browser or if it's bein
 */
 export const canUseDOM: boolean;
 
-interface IfProps {
+type IfProps = {
 	/**
 	Condition to check. Children are only rendered if `true`.
 	*/
@@ -104,7 +109,7 @@ interface IfProps {
 	If you need the children to not be evaluated when `condition` is `false`, pass a function to the `render` prop that returns the children.
 	*/
 	readonly render?: () => ReactNode;
-}
+};
 
 /**
 React component that renders the children if the `condition` prop is `true`.
@@ -139,7 +144,7 @@ import {If} from 'react-extras';
 */
 export class If extends ReactComponent<IfProps> {}
 
-interface ChooseOtherwiseProps {
+type ChooseOtherwiseProps = {
 	/**
 	Children to render in the default case.
 	*/
@@ -149,7 +154,7 @@ interface ChooseOtherwiseProps {
 	If you need the children to not be evaluated when a `<Condition.When>` component has a true condition, pass a function to the `render` prop that returns the children.
 	*/
 	readonly render?: () => ReactNode;
-}
+};
 
 export class ChooseOtherwise extends ReactComponent<ChooseOtherwiseProps> {}
 
@@ -213,7 +218,7 @@ export class Choose extends ReactComponent {
 	static Otherwise: typeof ChooseOtherwise;
 }
 
-interface ForProps<T> {
+type ForProps<T> = {
 	/**
 	Items to iterate over. `render` will be called once per item.
 	*/
@@ -223,7 +228,7 @@ interface ForProps<T> {
 	Returns the element to render corresponding to an `item`.
 	*/
 	readonly render?: (item: T, index: number) => ReactNode;
-}
+};
 
 /**
 React component that iterates over the `of` prop and renders the `render` prop.
@@ -252,7 +257,7 @@ Or you could just use plain JavaScript:
 */
 export class For<T> extends ReactComponent<ForProps<T>> {}
 
-interface ImageProps extends HTMLProps<HTMLImageElement> {
+type ImageProps = {
 	/**
 	URL of the image. Use instead of `src`.
 	*/
@@ -264,7 +269,7 @@ interface ImageProps extends HTMLProps<HTMLImageElement> {
 	Default: Hide the image if it fails to load.
 	*/
 	readonly fallbackUrl?: string;
-}
+} & HTMLProps<HTMLImageElement>;
 
 /**
 React component that improves the `<img>` element.
@@ -285,7 +290,7 @@ It supports all the props that `<img>` supports, but you use the prop `url` inst
 */
 export class Image extends ReactComponent<ImageProps> {}
 
-interface ElementClassProps {
+type ElementClassProps = {
 	/**
 	Classes to add to the root element.
 
@@ -299,7 +304,7 @@ interface ElementClassProps {
 	Either a single class or multiple classes separated by space.
 	*/
 	readonly remove?: string;
-}
+};
 
 /**
 Renderless React component that can add and remove classes to the root `<html>` element. It accepts an `add` prop for adding classes, and a `remove` prop for removing classes. Both accept either a single class or multiple classes separated by space.

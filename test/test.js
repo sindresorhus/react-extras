@@ -100,7 +100,7 @@ test('<For>', t => {
 	}/>);
 
 	const error = t.throws(() => snapshotJSX(t, <For of={['🌈', '🦄', '😎']}/>), Error);
-	error.message = error.message.replace(/\n|\r| +(?= )/g, '');
+	error.message = error.message.replaceAll(/\n|\r| +(?= )/g, '');
 
 	const expectedErrorMessage = (
 		'Warning: Failed prop type: The prop `render` is marked as required '
@@ -110,22 +110,22 @@ test('<For>', t => {
 });
 
 test('<Image>', t => {
-	snapshotJSX(t, <Image url="https://sindresorhus.com/unicorn"/>);
+	snapshotJSX(t, <Image url='https://sindresorhus.com/unicorn'/>);
 });
 
 test('<RootClass/>', t => {
 	const element = document.documentElement;
 
-	renderIntoDocument(<RootClass add="foo"/>);
+	renderIntoDocument(<RootClass add='foo'/>);
 	t.true(element.classList.contains('foo'));
-	renderIntoDocument(<RootClass remove="foo"/>);
+	renderIntoDocument(<RootClass remove='foo'/>);
 	t.false(element.classList.contains('foo'));
 	element.className = '';
 
-	renderIntoDocument(<RootClass add="foo bar"/>);
+	renderIntoDocument(<RootClass add='foo bar'/>);
 	t.true(element.classList.contains('foo'));
 	t.true(element.classList.contains('bar'));
-	renderIntoDocument(<RootClass remove="foo"/>);
+	renderIntoDocument(<RootClass remove='foo'/>);
 	t.false(element.classList.contains('foo'));
 	t.true(element.classList.contains('bar'));
 	element.className = '';
@@ -134,9 +134,9 @@ test('<RootClass/>', t => {
 test('<BodyClass/>', t => {
 	const element = document.body;
 
-	renderIntoDocument(<BodyClass add="foo"/>);
+	renderIntoDocument(<BodyClass add='foo'/>);
 	t.true(element.classList.contains('foo'));
-	renderIntoDocument(<BodyClass remove="foo"/>);
+	renderIntoDocument(<BodyClass remove='foo'/>);
 	t.false(element.classList.contains('foo'));
 	element.className = '';
 });
