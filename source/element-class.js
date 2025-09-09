@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class ElementClass extends React.PureComponent {
-	componentWillMount() {
+	componentDidMount() {
 		const {add, remove} = this.props;
 		const {classList} = this.element;
 
