@@ -13,6 +13,8 @@ import {
 	Image,
 	RootClass,
 	BodyClass,
+	intersperse,
+	Join,
 } from '../index.js';
 
 class Bar extends ReactComponent {
@@ -84,4 +86,46 @@ const RootTest = (props: {isDarkMode: boolean}) => (
 		<BodyClass remove='dark-mode'/>
 		<BodyClass add='logged-in paid-user' remove='promo'/>
 	</If>
+);
+
+// Test intersperse function
+const items = ['Apple', 'Orange', 'Banana'].map(item => <li key={item}>{item}</li>);
+
+// Test with array of ReactNodes
+expectType<React.ReactNode[]>(intersperse(items, ', '));
+
+// Test with single ReactNode
+expectType<React.ReactNode[]>(intersperse(<div>single</div>, ', '));
+
+// Test with separator function
+expectType<React.ReactNode[]>(intersperse(items, (index, count) =>
+	index === count - 2 ? ' and ' : ', ',
+));
+
+// Test with no separator
+expectType<React.ReactNode[]>(intersperse(items));
+
+// Test Join component
+const JoinTest = (
+	<Join>
+		<li>Apple</li>
+		<li>Orange</li>
+		<li>Banana</li>
+	</Join>
+);
+
+const JoinWithCustomSeparator = (
+	<Join separator=' | '>
+		<a href='#'>Home</a>
+		<a href='#'>About</a>
+		<a href='#'>Contact</a>
+	</Join>
+);
+
+const JoinWithFunctionSeparator = (
+	<Join separator={(index, count) => index === count - 2 ? ' and ' : ', '}>
+		<span>Apple</span>
+		<span>Orange</span>
+		<span>Banana</span>
+	</Join>
 );
