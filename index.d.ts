@@ -400,7 +400,7 @@ type JoinProps = {
 
 	Can be a ReactNode or a function that returns a ReactNode.
 
-	Default: ', '
+	@default ', '
 	*/
 	readonly separator?: ReactNode | ((index: number, count: number) => ReactNode);
 
