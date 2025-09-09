@@ -10,7 +10,7 @@ export function intersperse(
 
 	// Short-circuit if no separators needed or separator is falsy (and not a function)
 	// Note: undefined check won't trigger due to default parameter, but null and false will
-	if (count <= 1 || (typeof separator !== 'function' && (separator === null || separator === false))) {
+	if (count <= 1 || separator === null || separator === false) {
 		return items;
 	}
 
