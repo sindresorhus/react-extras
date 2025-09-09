@@ -3,6 +3,7 @@ import {
 	type ComponentClass,
 	type HTMLProps,
 	type ReactNode,
+	type JSX,
 } from 'react';
 
 /**
@@ -357,6 +358,98 @@ body.dark-mode {
 ```
 */
 export class BodyClass extends ReactComponent<ElementClassProps> {}
+
+/**
+Inserts a separator between each element of the children.
+
+@param children - The elements to intersperse with separators.
+@param separator - The separator to insert between elements. Can be a ReactNode or a function that returns a ReactNode.
+
+@example
+```
+import {intersperse} from 'react-extras';
+
+const items = ['Apple', 'Orange', 'Banana'];
+const list = intersperse(
+	items.map(item => <li key={item}>{item}</li>),
+	', '
+);
+// => [<li>Apple</li>, ', ', <li>Orange</li>, ', ', <li>Banana</li>]
+```
+
+@example
+```
+import {intersperse} from 'react-extras';
+
+const items = ['Apple', 'Orange', 'Banana'];
+const list = intersperse(
+	items.map(item => <li key={item}>{item}</li>),
+	(index, count) => index === count - 2 ? ' and ' : ', '
+);
+// => [<li>Apple</li>, ', ', <li>Orange</li>, ' and ', <li>Banana</li>]
+```
+*/
+export function intersperse(
+	children: ReactNode,
+	separator?: ReactNode | ((index: number, count: number) => ReactNode)
+): ReactNode[];
+
+type JoinProps = {
+	/**
+	The separator to insert between elements.
+
+	Can be a ReactNode or a function that returns a ReactNode.
+
+	Default: ', '
+	*/
+	readonly separator?: ReactNode | ((index: number, count: number) => ReactNode);
+
+	/**
+	The elements to join with separators.
+	*/
+	readonly children: ReactNode;
+};
+
+/**
+React component that renders the children with a separator between each element.
+
+@example
+```
+import {Join} from 'react-extras';
+
+<Join>
+	<li>Apple</li>
+	<li>Orange</li>
+	<li>Banana</li>
+</Join>
+// => <li>Apple</li>, <li>Orange</li>, <li>Banana</li>
+```
+
+@example
+```
+import {Join} from 'react-extras';
+
+<Join separator=" | ">
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</Join>
+// => <a href="#">Home</a> | <a href="#">About</a> | <a href="#">Contact</a>
+```
+
+@example
+```
+import {Join} from 'react-extras';
+
+<Join separator={(index, count) => index === count - 2 ? ' and ' : ', '}>
+	<span>Apple</span>
+	<span>Orange</span>
+	<span>Banana</span>
+</Join>
+// => <span>Apple</span>, <span>Orange</span> and <span>Banana</span>
+```
+*/
+export function Join(props: JoinProps): JSX.Element;
 
 export {default as classNames} from '@sindresorhus/class-names';
 export {default as autoBind} from 'auto-bind/react';

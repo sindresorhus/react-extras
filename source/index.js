@@ -25,3 +25,4 @@ export {default as For} from './for.js';
 export {default as Image} from './image.js';
 export {default as RootClass} from './root-class.js';
 export {default as BodyClass} from './body-class.js';
+export {intersperse, Join} from './intersperse.js';

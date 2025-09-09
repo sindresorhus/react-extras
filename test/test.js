@@ -14,6 +14,8 @@ import {
 	BodyClass,
 	isStatelessComponent,
 	getDisplayName,
+	intersperse,
+	Join,
 } from '../dist/index.js';
 
 const renderIntoDocument = element => {
@@ -178,4 +180,93 @@ test('isStatelessComponent()', t => {
 test('getDisplayName()', t => {
 	t.is(getDisplayName(BodyClass), 'BodyClass');
 	t.is(getDisplayName(() => {}), 'Component');
+});
+
+test('intersperse()', t => {
+	// Basic usage with default separator
+	const result1 = intersperse(['a', 'b', 'c']);
+	t.is(result1.length, 5);
+	t.is(result1[0], 'a');
+	t.is(result1[2], 'b');
+	t.is(result1[4], 'c');
+
+	// Custom separator
+	const result2 = intersperse(['a', 'b', 'c'], ' | ');
+	t.is(result2.length, 5);
+	t.is(result2[1].props.children, ' | ');
+	t.is(result2[3].props.children, ' | ');
+
+	// Function separator
+	const result3 = intersperse(['a', 'b', 'c'], (index, count) =>
+		index === count - 2 ? ' and ' : ', ',
+	);
+	t.is(result3.length, 5);
+	t.is(result3[1].props.children, ', ');
+	t.is(result3[3].props.children, ' and ');
+
+	// Function returning falsy values
+	const result4 = intersperse(['a', 'b', 'c', 'd'], index =>
+		index === 0 ? null : ' - ',
+	);
+	t.is(result4.length, 6); // 'a', 'b', ' - ', 'c', ' - ', 'd'
+	t.is(result4[0], 'a');
+	t.is(result4[1], 'b');
+	t.is(result4[2].props.children, ' - ');
+
+	// Falsy separators (should short-circuit)
+	t.deepEqual(intersperse(['a', 'b', 'c'], null), ['a', 'b', 'c']);
+	t.deepEqual(intersperse(['a', 'b', 'c'], false), ['a', 'b', 'c']);
+
+	// Single item (no separators needed)
+	t.deepEqual(intersperse(['a']), ['a']);
+
+	// Empty array
+	t.deepEqual(intersperse([]), []);
+
+	// React elements
+	const elements = [
+		React.createElement('span', {key: '1'}, 'A'),
+		React.createElement('span', {key: '2'}, 'B'),
+		React.createElement('span', {key: '3'}, 'C'),
+	];
+	const result5 = intersperse(elements, ' · ');
+	t.is(result5.length, 5);
+	// React adds prefix to keys, so check they end with our keys
+	t.regex(String(result5[0].key), /1$/);
+	t.regex(String(result5[2].key), /2$/);
+	t.regex(String(result5[4].key), /3$/);
+	t.is(result5[1].props.children, ' · ');
+
+	// Separator as React element
+	const result6 = intersperse(['a', 'b', 'c'], React.createElement('hr'));
+	t.is(result6.length, 5);
+	t.is(result6[1].props.children.type, 'hr');
+});
+
+test('<Join/>', t => {
+	// Default separator
+	const html1 = verifyRenders(t, <Join>
+		<span>Apple</span>
+		<span>Orange</span>
+		<span>Banana</span>
+	</Join>);
+	t.regex(html1, /Apple/);
+	t.regex(html1, /Orange/);
+	t.regex(html1, /Banana/);
+
+	// Custom separator
+	const html2 = verifyRenders(t, <Join separator=' | '>
+		<a href='#'>Home</a>
+		<a href='#'>About</a>
+		<a href='#'>Contact</a>
+	</Join>);
+	t.regex(html2, /Home/);
+	t.regex(html2, /About/);
+	t.regex(html2, /Contact/);
+
+	// Single child
+	const html3 = verifyRenders(t, <Join>
+		<div>Only child</div>
+	</Join>);
+	t.regex(html3, /Only child/);
 });
