@@ -1,6 +1,6 @@
 {
 	"name": "react-extras",
-	"version": "3.0.1",
+	"version": "4.0.0",
 	"description": "Useful components and utilities for working with React",
 	"license": "MIT",
 	"repository": "sindresorhus/react-extras",
