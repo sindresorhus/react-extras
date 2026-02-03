@@ -1,5 +1,5 @@
 import test from 'ava';
-import React from 'react';
+import React, {act} from 'react';
 import {createRoot} from 'react-dom/client';
 import {flushSync} from 'react-dom';
 import {renderToStaticMarkup} from 'react-dom/server';
@@ -16,19 +16,46 @@ import {
 	getDisplayName,
 	intersperse,
 	Join,
+	useEventListener,
+	useWindowEvent,
+	useDocumentEvent,
 } from '../dist/index.js';
 
 const renderIntoDocument = element => {
 	const div = document.createElement('div');
 	document.body.append(div);
 	const root = createRoot(div);
-	flushSync(() => {
-		root.render(element);
+	act(() => {
+		flushSync(() => {
+			root.render(element);
+		});
 	});
 	return element;
 };
 
+// Helper that returns a render function and unmount function for testing lifecycle
+const createTestRoot = () => {
+	const div = document.createElement('div');
+	document.body.append(div);
+	const root = createRoot(div);
+	return {
+		async render(element) {
+			await act(async () => {
+				root.render(element);
+			});
+		},
+		async unmount() {
+			await act(async () => {
+				root.unmount();
+			});
+			div.remove();
+		},
+	};
+};
+
 browserEnv();
+
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 // Helper to verify component renders without errors
 const verifyRenders = (t, jsx) => {
@@ -269,4 +296,469 @@ test('<Join/>', t => {
 		<div>Only child</div>
 	</Join>);
 	t.regex(html3, /Only child/);
+});
+
+test('useEventListener()', t => {
+	let clickCount = 0;
+	const button = document.createElement('button');
+	document.body.append(button);
+
+	const TestComponent = () => {
+		useEventListener(button, 'click', () => {
+			clickCount++;
+		});
+		return null;
+	};
+
+	renderIntoDocument(<TestComponent/>);
+
+	button.click();
+	t.is(clickCount, 1);
+
+	button.click();
+	t.is(clickCount, 2);
+
+	button.remove();
+});
+
+test('useWindowEvent()', t => {
+	let resizeCount = 0;
+
+	const TestComponent = () => {
+		useWindowEvent('resize', () => {
+			resizeCount++;
+		});
+		return null;
+	};
+
+	renderIntoDocument(<TestComponent/>);
+
+	window.dispatchEvent(new window.Event('resize'));
+	t.is(resizeCount, 1);
+
+	window.dispatchEvent(new window.Event('resize'));
+	t.is(resizeCount, 2);
+});
+
+test('useDocumentEvent()', t => {
+	let keydownCount = 0;
+
+	const TestComponent = () => {
+		useDocumentEvent('keydown', () => {
+			keydownCount++;
+		});
+		return null;
+	};
+
+	renderIntoDocument(<TestComponent/>);
+
+	document.dispatchEvent(new KeyboardEvent('keydown', {key: 'a'}));
+	t.is(keydownCount, 1);
+
+	document.dispatchEvent(new KeyboardEvent('keydown', {key: 'b'}));
+	t.is(keydownCount, 2);
+});
+
+test.serial('useEventListener() - cleanup on unmount', async t => {
+	let clickCount = 0;
+	const button = document.createElement('button');
+	document.body.append(button);
+
+	const TestComponent = () => {
+		useEventListener(button, 'click', () => {
+			clickCount++;
+		});
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+	await render(<TestComponent/>);
+
+	button.click();
+	t.is(clickCount, 1);
+
+	await unmount();
+
+	// After unmount, listener should be removed
+	button.click();
+	t.is(clickCount, 1); // Should still be 1, not 2
+
+	button.remove();
+});
+
+test.serial('useEventListener() - cleanup runs without passive effects', t => {
+	let addCallCount = 0;
+	let removeCallCount = 0;
+	const target = {
+		addEventListener() {
+			addCallCount++;
+		},
+		removeEventListener() {
+			removeCallCount++;
+		},
+	};
+
+	const container = document.createElement('div');
+	document.body.append(container);
+	const root = createRoot(container);
+
+	const TestComponent = () => {
+		useEventListener(target, 'click', () => {});
+		return null;
+	};
+
+	const previousActEnvironment = globalThis.IS_REACT_ACT_ENVIRONMENT;
+	globalThis.IS_REACT_ACT_ENVIRONMENT = false;
+
+	try {
+		flushSync(() => {
+			root.render(<TestComponent/>);
+		});
+		flushSync(() => {
+			root.unmount();
+		});
+	} finally {
+		globalThis.IS_REACT_ACT_ENVIRONMENT = previousActEnvironment;
+	}
+
+	t.is(addCallCount, 1);
+	t.is(removeCallCount, 1);
+
+	container.remove();
+});
+
+test.serial('useEventListener() - handler updates are respected', async t => {
+	const calls = [];
+	const button = document.createElement('button');
+	document.body.append(button);
+
+	const TestComponent = ({value}) => {
+		useEventListener(button, 'click', () => {
+			calls.push(value);
+		});
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+
+	await render(<TestComponent value='first'/>);
+	button.click();
+	t.deepEqual(calls, ['first']);
+
+	// Re-render with new handler that captures different value
+	await render(<TestComponent value='second'/>);
+	button.click();
+	t.deepEqual(calls, ['first', 'second']); // Should use updated handler
+
+	await unmount();
+	button.remove();
+});
+
+test.serial('useEventListener() - handler updates before events after commit', async t => {
+	const calls = [];
+	const button = document.createElement('button');
+	const container = document.createElement('div');
+	document.body.append(button);
+	document.body.append(container);
+
+	const root = createRoot(container);
+
+	const TestComponent = ({value}) => {
+		useEventListener(button, 'click', () => {
+			calls.push(value);
+		});
+		return null;
+	};
+
+	await act(async () => {
+		root.render(<TestComponent value='first'/>);
+	});
+
+	await act(async () => {
+		flushSync(() => {
+			root.render(<TestComponent value='second'/>);
+		});
+
+		button.click();
+	});
+
+	t.deepEqual(calls, ['second']);
+
+	await act(async () => {
+		root.unmount();
+	});
+
+	container.remove();
+	button.remove();
+});
+
+test.serial('useEventListener() - ref target attaches after mount', async t => {
+	let clickCount = 0;
+	const buttonReference = React.createRef();
+
+	const TestComponent = () => {
+		useEventListener(buttonReference, 'click', () => {
+			clickCount++;
+		});
+		return <button ref={buttonReference} type='button'>Click</button>;
+	};
+
+	const {render, unmount} = createTestRoot();
+	await render(<TestComponent/>);
+
+	buttonReference.current.click();
+	t.is(clickCount, 1);
+
+	await unmount();
+});
+
+test.serial('useEventListener() - ref target can be null before mount', async t => {
+	let clickCount = 0;
+	const buttonReference = React.createRef();
+	let setShowButton;
+
+	const TestComponent = () => {
+		const [showButton, setShowButtonState] = React.useState(false);
+		setShowButton = setShowButtonState;
+
+		useEventListener(buttonReference, 'click', () => {
+			clickCount++;
+		});
+
+		return showButton ? <button ref={buttonReference} type='button'>Click</button> : null;
+	};
+
+	const {render, unmount} = createTestRoot();
+
+	await t.notThrowsAsync(async () => {
+		await render(<TestComponent/>);
+	});
+
+	await act(async () => {
+		setShowButton(true);
+	});
+
+	await act(async () => {});
+
+	t.truthy(buttonReference.current);
+	buttonReference.current.click();
+	t.is(clickCount, 1);
+
+	await unmount();
+});
+
+test.serial('useEventListener() - reattaches after StrictMode replay', async t => {
+	let clickCount = 0;
+	let addCallCount = 0;
+	let removeCallCount = 0;
+	const button = document.createElement('button');
+	const originalAddEventListener = button.addEventListener;
+	const originalRemoveEventListener = button.removeEventListener;
+	document.body.append(button);
+
+	button.addEventListener = (...listenerArguments) => {
+		addCallCount++;
+		return originalAddEventListener.call(button, ...listenerArguments);
+	};
+
+	button.removeEventListener = (...listenerArguments) => {
+		removeCallCount++;
+		return originalRemoveEventListener.call(button, ...listenerArguments);
+	};
+
+	const TestComponent = () => {
+		useEventListener(button, 'click', () => {
+			clickCount++;
+		});
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+	await render(
+		<React.StrictMode>
+			<TestComponent/>
+		</React.StrictMode>,
+	);
+
+	t.true(removeCallCount > 0);
+	t.is(addCallCount, removeCallCount + 1);
+
+	button.click();
+	t.is(clickCount, 1);
+
+	await unmount();
+	button.addEventListener = originalAddEventListener;
+	button.removeEventListener = originalRemoveEventListener;
+	button.remove();
+});
+
+test.serial('useEventListener() - ref target changes resubscribe', async t => {
+	const calls = [];
+	const buttonReference = React.createRef();
+	let setShowFirstButton;
+
+	const TestComponent = () => {
+		const [showFirstButton, setShowFirstButtonState] = React.useState(true);
+		setShowFirstButton = setShowFirstButtonState;
+
+		useEventListener(buttonReference, 'click', () => {
+			calls.push(showFirstButton ? 'first' : 'second');
+		});
+
+		return showFirstButton ? (
+			<button ref={buttonReference} key='first' type='button'>First</button>
+		) : (
+			<button ref={buttonReference} key='second' type='button'>Second</button>
+		);
+	};
+
+	const {render, unmount} = createTestRoot();
+	await render(<TestComponent/>);
+
+	const firstButton = buttonReference.current;
+
+	await act(async () => {
+		setShowFirstButton(false);
+	});
+
+	await act(async () => {});
+
+	const secondButton = buttonReference.current;
+	t.not(secondButton, firstButton);
+
+	t.deepEqual(calls, []);
+	secondButton.click();
+
+	t.deepEqual(calls, ['second']);
+
+	await unmount();
+});
+
+test.serial('useEventListener() - does not pass options when omitted', async t => {
+	const button = document.createElement('button');
+	const originalAddEventListener = button.addEventListener;
+	let listenerArgumentsLength;
+	document.body.append(button);
+
+	button.addEventListener = (...listenerArguments) => {
+		listenerArgumentsLength = listenerArguments.length;
+		return originalAddEventListener.call(button, ...listenerArguments);
+	};
+
+	const TestComponent = () => {
+		useEventListener(button, 'click', () => {});
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+	await render(<TestComponent/>);
+
+	t.is(listenerArgumentsLength, 2);
+
+	await unmount();
+	button.addEventListener = originalAddEventListener;
+	button.remove();
+});
+
+test.serial('useEventListener() - options are passed correctly', async t => {
+	const phases = [];
+	const parent = document.createElement('div');
+	const child = document.createElement('button');
+	parent.append(child);
+	document.body.append(parent);
+
+	const TestComponent = () => {
+		// Capture phase listener on parent
+		useEventListener(parent, 'click', () => {
+			phases.push('parent-capture');
+		}, {capture: true});
+
+		// Bubble phase listener on parent
+		useEventListener(parent, 'click', () => {
+			phases.push('parent-bubble');
+		}, {capture: false});
+
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+	await render(<TestComponent/>);
+
+	child.click();
+	// Capture phase should fire before bubble phase
+	t.deepEqual(phases, ['parent-capture', 'parent-bubble']);
+
+	await unmount();
+	parent.remove();
+});
+
+test.serial('useEventListener() - handler stays at last commit during render', async t => {
+	const calls = [];
+	const button = document.createElement('button');
+	document.body.append(button);
+
+	const TestComponent = ({value, triggerDuringRender}) => {
+		useEventListener(button, 'click', () => {
+			calls.push(value);
+		});
+
+		if (triggerDuringRender) {
+			button.click();
+		}
+
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+
+	await render(<TestComponent value='committed' triggerDuringRender={false}/>);
+	t.deepEqual(calls, []);
+
+	await render(<TestComponent value='aborted' triggerDuringRender/>);
+	t.deepEqual(calls, ['committed']);
+
+	await unmount();
+	button.remove();
+});
+
+test.serial('useEventListener() - abort signal is forwarded', async t => {
+	const button = document.createElement('button');
+	const abortController = new AbortController();
+	const originalAddEventListener = button.addEventListener;
+	let forwardedSignal;
+	document.body.append(button);
+
+	button.addEventListener = (type, listener, options) => {
+		if (options && typeof options === 'object') {
+			forwardedSignal = options.signal;
+		}
+
+		return originalAddEventListener.call(button, type, listener, options);
+	};
+
+	const TestComponent = () => {
+		useEventListener(button, 'click', () => {}, {signal: abortController.signal});
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+	await render(<TestComponent/>);
+
+	t.is(forwardedSignal, abortController.signal);
+
+	await unmount();
+	button.addEventListener = originalAddEventListener;
+	button.remove();
+});
+
+test('useEventListener() - undefined target is handled', t => {
+	// Should not throw when target is undefined (SSR scenario)
+	const TestComponent = () => {
+		useEventListener(undefined, 'click', () => {});
+		return null;
+	};
+
+	t.notThrows(() => {
+		renderIntoDocument(<TestComponent/>);
+	});
 });

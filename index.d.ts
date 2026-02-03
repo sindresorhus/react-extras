@@ -451,5 +451,134 @@ import {Join} from 'react-extras';
 */
 export function Join(props: JoinProps): JSX.Element;
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+type NullishTarget<T> = T | null | undefined;
+type ReferenceTarget<T> = {readonly current: NullishTarget<T>};
+
+/**
+Adds an event listener to an element and automatically removes it on cleanup.
+
+The handler always has access to the latest props/state without needing to specify dependencies.
+
+@param target - The target to add the event listener to.
+@param eventName - The name of the event to listen for.
+@param handler - The event handler function.
+@param options - Options to pass to `addEventListener`.
+
+@example
+```
+import {useEventListener} from 'react-extras';
+
+function Component() {
+	useEventListener(document.body, 'click', event => {
+		console.log('Body clicked!', event);
+	});
+
+	return <div>Click anywhere</div>;
+}
+```
+*/
+export function useEventListener<K extends keyof HTMLElementEventMap>(
+	target: NullishTarget<HTMLElement> | ReferenceTarget<HTMLElement>,
+	eventName: K,
+	handler: (event: HTMLElementEventMap[K]) => void,
+	options?: boolean | AddEventListenerOptions
+): void;
+export function useEventListener<K extends keyof WindowEventMap>(
+	target: NullishTarget<Window> | ReferenceTarget<Window>,
+	eventName: K,
+	handler: (event: WindowEventMap[K]) => void,
+	options?: boolean | AddEventListenerOptions
+): void;
+export function useEventListener<K extends keyof DocumentEventMap>(
+	target: NullishTarget<Document> | ReferenceTarget<Document>,
+	eventName: K,
+	handler: (event: DocumentEventMap[K]) => void,
+	options?: boolean | AddEventListenerOptions
+): void;
+export function useEventListener<K extends keyof MediaQueryListEventMap>(
+	target: NullishTarget<MediaQueryList> | ReferenceTarget<MediaQueryList>,
+	eventName: K,
+	handler: (event: MediaQueryListEventMap[K]) => void,
+	options?: boolean | AddEventListenerOptions
+): void;
+export function useEventListener(
+	target: NullishTarget<EventTarget> | ReferenceTarget<EventTarget>,
+	eventName: string,
+	handler: (event: Event) => void,
+	options?: boolean | AddEventListenerOptions
+): void;
+
+/**
+Convenience hook for `useEventListener(window, …)` that is SSR-safe.
+
+The handler always has access to the latest props/state without needing to specify dependencies.
+
+@param eventName - The name of the event to listen for.
+@param handler - The event handler function.
+@param options - Options to pass to `addEventListener`.
+
+@example
+```
+import {useWindowEvent} from 'react-extras';
+
+function Component() {
+	useWindowEvent('resize', event => {
+		console.log('Window resized!', event);
+	});
+
+	return <div>Resize the window</div>;
+}
+```
+
+@example
+```
+import {useWindowEvent} from 'react-extras';
+
+function Component() {
+	useWindowEvent('keydown', event => {
+		if (event.key === 'Escape') {
+			console.log('Escape pressed!');
+		}
+	});
+
+	return <div>Press Escape</div>;
+}
+```
+*/
+export function useWindowEvent<K extends keyof WindowEventMap>(
+	eventName: K,
+	handler: (event: WindowEventMap[K]) => void,
+	options?: boolean | AddEventListenerOptions
+): void;
+
+/**
+Convenience hook for `useEventListener(document, …)` that is SSR-safe.
+
+The handler always has access to the latest props/state without needing to specify dependencies.
+
+@param eventName - The name of the event to listen for.
+@param handler - The event handler function.
+@param options - Options to pass to `addEventListener`.
+
+@example
+```
+import {useDocumentEvent} from 'react-extras';
+
+function Component() {
+	useDocumentEvent('visibilitychange', () => {
+		console.log('Visibility changed:', document.visibilityState);
+	});
+
+	return <div>Switch tabs to see visibility changes</div>;
+}
+```
+*/
+export function useDocumentEvent<K extends keyof DocumentEventMap>(
+	eventName: K,
+	handler: (event: DocumentEventMap[K]) => void,
+	options?: boolean | AddEventListenerOptions
+): void;
+
 export {default as classNames} from '@sindresorhus/class-names';
 export {default as autoBind} from 'auto-bind/react';
