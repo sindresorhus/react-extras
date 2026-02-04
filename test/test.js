@@ -454,6 +454,34 @@ test.serial('useEventListener() - handler updates are respected', async t => {
 	button.remove();
 });
 
+test.serial('useEventListener() - useEffectEvent handler sees latest values', async t => {
+	const calls = [];
+	const button = document.createElement('button');
+	document.body.append(button);
+
+	const TestComponent = ({value}) => {
+		const onClick = React.useEffectEvent(() => {
+			calls.push(value);
+		});
+
+		useEventListener(button, 'click', onClick);
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+
+	await render(<TestComponent value='first'/>);
+	button.click();
+	t.deepEqual(calls, ['first']);
+
+	await render(<TestComponent value='second'/>);
+	button.click();
+	t.deepEqual(calls, ['first', 'second']);
+
+	await unmount();
+	button.remove();
+});
+
 test.serial('useEventListener() - handler updates before events after commit', async t => {
 	const calls = [];
 	const button = document.createElement('button');
