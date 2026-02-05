@@ -327,6 +327,56 @@ import {Join} from 'react-extras';
 // => <span>Apple</span>, <span>Orange</span> and <span>Banana</span>
 ```
 
+### useEventListener(target, eventName, handler, options?)
+
+Adds an event listener to an element and automatically removes it on cleanup.
+
+The handler always has access to the latest props/state without needing to specify dependencies.
+
+```jsx
+import {useEventListener} from 'react-extras';
+
+function Component() {
+	useEventListener(document.body, 'click', event => {
+		console.log('Body clicked!', event);
+	});
+
+	return <div>Click anywhere</div>;
+}
+```
+
+### useWindowEvent(eventName, handler, options?)
+
+Convenience hook for `useEventListener(window, …)` that is SSR-safe.
+
+```jsx
+import {useWindowEvent} from 'react-extras';
+
+function Component() {
+	useWindowEvent('resize', event => {
+		console.log('Window resized!', event);
+	});
+
+	return <div>Resize the window</div>;
+}
+```
+
+### useDocumentEvent(eventName, handler, options?)
+
+Convenience hook for `useEventListener(document, …)` that is SSR-safe.
+
+```jsx
+import {useDocumentEvent} from 'react-extras';
+
+function Component() {
+	useDocumentEvent('visibilitychange', () => {
+		console.log('Visibility changed:', document.visibilityState);
+	});
+
+	return <div>Switch tabs to see visibility changes</div>;
+}
+```
+
 ### isStatelessComponent(Component)
 
 Returns a boolean of whether the given `Component` is a [functional stateless component](https://javascriptplayground.com/functional-stateless-components-react/).

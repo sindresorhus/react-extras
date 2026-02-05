@@ -15,6 +15,7 @@ import {
 	BodyClass,
 	intersperse,
 	Join,
+	useEventListener,
 } from '../index.js';
 
 class Bar extends ReactComponent {
@@ -129,3 +130,18 @@ const JoinWithFunctionSeparator = (
 		<span>Banana</span>
 	</Join>
 );
+
+const maybeButton = document.querySelector('button');
+useEventListener(maybeButton, 'click', event => {
+	event.preventDefault();
+});
+
+const maybeTarget = document.querySelector('div');
+useEventListener(maybeTarget, 'custom', event => {
+	event.preventDefault();
+});
+
+const buttonReference = React.createRef<HTMLButtonElement>();
+useEventListener(buttonReference, 'click', event => {
+	event.preventDefault();
+});
