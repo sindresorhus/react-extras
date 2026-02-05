@@ -6,8 +6,9 @@ import {
 
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
+// Normalize to a stable shape so options equality is value-based, not identity-based.
 const normalizeOptions = options => {
-	if (options === undefined) {
+	if (options === undefined || options === null) {
 		return {type: 'none'};
 	}
 
@@ -16,6 +17,10 @@ const normalizeOptions = options => {
 			type: 'boolean',
 			capture: options,
 		};
+	}
+
+	if (typeof options !== 'object') {
+		return {type: 'none'};
 	}
 
 	return {

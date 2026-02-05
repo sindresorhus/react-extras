@@ -720,6 +720,49 @@ test.serial('useEventListener() - options are passed correctly', async t => {
 	parent.remove();
 });
 
+test.serial('useEventListener() - boolean options are passed as capture', async t => {
+	const button = document.createElement('button');
+	const originalAddEventListener = button.addEventListener;
+	let listenerArguments;
+	document.body.append(button);
+
+	button.addEventListener = (...nextListenerArguments) => {
+		listenerArguments = nextListenerArguments;
+		return originalAddEventListener.call(button, ...nextListenerArguments);
+	};
+
+	const TestComponent = () => {
+		useEventListener(button, 'click', () => {}, true);
+		return null;
+	};
+
+	const {render, unmount} = createTestRoot();
+	await render(<TestComponent/>);
+
+	t.is(listenerArguments.length, 3);
+	t.is(listenerArguments[2], true);
+
+	await unmount();
+	button.addEventListener = originalAddEventListener;
+	button.remove();
+});
+
+test('useEventListener() - null options are handled', t => {
+	const button = document.createElement('button');
+	document.body.append(button);
+
+	const TestComponent = () => {
+		useEventListener(button, 'click', () => {}, null);
+		return null;
+	};
+
+	t.notThrows(() => {
+		renderIntoDocument(<TestComponent/>);
+	});
+
+	button.remove();
+});
+
 test.serial('useEventListener() - handler stays at last commit during render', async t => {
 	const calls = [];
 	const button = document.createElement('button');
